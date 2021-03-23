@@ -5,7 +5,7 @@ public class Carre {
     //attributs
 
     /**
-     * coordonnee du carre
+     * coordonnee du carre par rapport au coin superieur gauche de la piece
      */
     private int x, y;
 

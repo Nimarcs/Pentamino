@@ -6,12 +6,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Piece {
+public class Piece {
 
     //attributs
 
     /**
-     * coordonnee du coin en haut a gauche de la piece
+     * coordonnee du coin en bas a gauche de la piece
      */
     private int x, y;
 
@@ -26,7 +26,7 @@ public abstract class Piece {
     private List<Carre> carres;
 
     //constructeurs
-    public Piece (int pX, int pY, char pLettre, String nomFichier) throws IOException, Exception{
+    public Piece (int pX, int pY, char pLettre, String nomFichier) throws Exception{
 
         //coordonnees
         this.x =pX; // voir les execeptions
@@ -34,10 +34,10 @@ public abstract class Piece {
 
         //lettre
         if (!Character.isLetter(pLettre)){
-            //lancer erreur
+            throw new Exception("Le char n'est pas une lettre");
         }
         this.lettre = Character.toUpperCase(pLettre);
-        this.carres = lireFichier(nomFichier , pX ,pY);
+        this.carres = lireFichier(nomFichier);
 
 
     }
@@ -65,19 +65,17 @@ public abstract class Piece {
     /**
      * methode qui lit les fichier contenant la forme de la piece
      * @param nomFichier nom du fichier contenant la forme
-     * @param pX abscisse du coin superieur gauche de la piece
-     * @param pY ordonnee du coin superieur gauche de la piece
      * @return Liste avec tous les carres qui compose la piece
      * @throws IOException erreur de lecture
      * @throws Exception erreur dans le fichier
      */
-    public static List<Carre> lireFichier(String nomFichier, int pX , int pY) throws IOException, Exception {
+    public static List<Carre> lireFichier(String nomFichier) throws IOException, Exception {
 
-        FileReader fileReader =  new FileReader(nomFichier);
+        FileReader fileReader =  new FileReader(("fichiers/"+nomFichier));
 
         boolean fin = false;
-        int x= pX;
-        int y = pY;
+        int x= 0;
+        int y = 0;
         List<Carre> carreList = new ArrayList<Carre>();
 
         while(! fin){
@@ -88,7 +86,6 @@ public abstract class Piece {
                     //fin fichier
                     fin=true;
                     break;
-
                 case 10:
                 case 13:
                     //retour chariot
