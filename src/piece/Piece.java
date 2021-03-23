@@ -1,4 +1,5 @@
 package piece;
+import exceptions.CoordonneeNegative;
 import jeu.Carre;
 
 import java.io.FileReader;
@@ -29,7 +30,11 @@ public class Piece {
     public Piece (int pX, int pY, char pLettre, String nomFichier) throws Exception{
 
         //coordonnees
-        this.x =pX; // voir les execeptions
+        if (pX < 0)
+            throw new CoordonneeNegative(pX);
+        if (pY < 0)
+            throw new CoordonneeNegative(pY);
+        this.x =pX;
         this.y = pY;
 
         //lettre
@@ -87,9 +92,11 @@ public class Piece {
                     fin=true;
                     break;
                 case 10:
+                    break;
                 case 13:
                     //retour chariot
                     y++;
+                    x = 0;
                     break;
                 case 35:
                     //# represente un carre
