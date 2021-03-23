@@ -34,7 +34,7 @@ public class Piece {
 
         //lettre
         if (!Character.isLetter(pLettre)){
-            //lancer erreur
+            throw new Exception("Le char n'est pas une lettre");
         }
         this.lettre = Character.toUpperCase(pLettre);
         this.carres = lireFichier(nomFichier);
