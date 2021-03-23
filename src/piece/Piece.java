@@ -11,7 +11,7 @@ public class Piece {
     //attributs
 
     /**
-     * coordonnee du coin en bas a gauche de la piece
+     * coordonnee du coin en haut a gauche de la piece
      */
     private int x, y;
 
