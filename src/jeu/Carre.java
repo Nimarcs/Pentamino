@@ -1,16 +1,18 @@
+package jeu;
+
 public class Carre {
 
     //attributs
 
     /**
-     * coordonnee de la piece
+     * coordonnee du carre
      */
     private int x, y;
 
     //Contructeurs
 
     /**
-     * Contructeur de Carre
+     * Contructeur de jeu.Carre
      * @param pX abcsisse du carre
      * @param pY ordonnee du carre
      */
