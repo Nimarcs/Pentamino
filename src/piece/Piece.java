@@ -1,5 +1,5 @@
 package piece;
-import exceptions.CoordonneeNegative;
+import exceptions.CoordonneeInvalide;
 import jeu.Carre;
 
 import java.io.FileReader;
@@ -31,9 +31,9 @@ public class Piece {
 
         //coordonnees
         if (pX < 0)
-            throw new CoordonneeNegative(pX);
+            throw new CoordonneeInvalide(pX, pY);
         if (pY < 0)
-            throw new CoordonneeNegative(pY);
+            throw new CoordonneeInvalide(pX, pY);
         this.x =pX;
         this.y = pY;
 
@@ -114,4 +114,15 @@ public class Piece {
 
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Piece piece = (Piece) o;
+
+        if (x != piece.x) return false;
+        if (y != piece.y) return false;
+        return (lettre != piece.lettre);
+    }
 }
