@@ -1,10 +1,14 @@
 package jeu;
 
-import exceptions.CoordonneeNegative;
-import exceptions.NumeroInconnue;
+import exceptions.*;
+import piece.L;
+import piece.Piece;
+import piece.U;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Partie {
@@ -22,18 +26,24 @@ public class Partie {
      */
     private List<Piece> pieceAPoser;
 
-    public Partie(int x, int y) throws CoordonneeNegative {
-        //Par convention, l'origine [(0, 0)] est en bas à gauche
-        this.testCoordonnee(x, y);
+    public Partie(int x, int y) throws Exception {
+        //Par convention, l'origine [(0, 0)] est en haut à gauche
+        if(x < 0 || y < 0) throw new DimensionsInvalide(x, y);
         this.grille = new char[x][y];
         this.remplirGrille('.');
-        this.piecePosees = new ArrayList<>();
+        this.piecePosees = new ArrayList<Piece>();
         this.remplirAleatoirementPieceAPoser();
     }
 
-    public void testCoordonnee(int x, int y) throws CoordonneeNegative {
-        if(x < 0) throw new CoordonneeNegative(x);
-        if(y < 0) throw new CoordonneeNegative(y);
+    private void testCoordonnee(int x, int y) throws CoordonneeInvalide {
+        if(!this.estDansGrille(x, y)) throw new CoordonneeInvalide(x, y);
+    }
+
+    private boolean estDansGrille(int x, int y) {
+        if(x < 0) return false;
+        if(y < 0) return false;
+        if(x >= this.grille.length) return false;
+        return y < this.grille[0].length;
     }
 
     /**
@@ -49,9 +59,9 @@ public class Partie {
     /**
      * Méthode remplissant aléatoirement la liste des pièces à poser
      */
-    private void remplirAleatoirementPieceAPoser() {
-        this.pieceAPoser = new ArrayList<>();
-        //TODO
+    private void remplirAleatoirementPieceAPoser() throws Exception {
+        this.pieceAPoser = new ArrayList<Piece>();
+        this.pieceAPoser.add(new U(0, 0));
     }
 
     /**
@@ -68,15 +78,29 @@ public class Partie {
         }
     }
 
-    public void ajouterPiece(int n, int x, int y) throws NumeroInconnue, CoordonneeNegative {
+    public void ajouterPiece(int n, int x, int y) throws NumeroInconnue, CoordonneeInvalide, CaseDejaOccupe, PieceEmpietePiece, PieceDebordeTerrain {
         this.testCoordonnee(x, y);
         if(this.pieceAPoser.size() < n) throw new NumeroInconnue(n);
-
+        Piece piece = this.pieceAPoser.get(n);
+        char character = piece.getLettre();
+        if(this.grille[x][y] == character) throw new CaseDejaOccupe(x, y, character);
+        //On commence à placer la pièce
+        List<Carre> carresPiece = piece.getCarres();
+        for(Carre carre : carresPiece) {
+            this.afficherGrille();
+            int newX = y + carre.getY();
+            int newY = x + carre.getX();
+            if(!estDansGrille(newX, newY)) throw new PieceDebordeTerrain();
+            if(this.grille[newX][newY] != '.') throw new PieceEmpietePiece();
+            this.grille[newX][newY] = character;
+        }
     }
 
-    public static void main(String[] args) throws CoordonneeNegative {
-        Partie partie = new Partie(20, 10);
-        partie.afficherGrille();
+    public static void main(String[] args) throws Exception {
+        Partie jeu = new Partie(10, 10);
+        jeu.ajouterPiece(0, 1, 3);
+        jeu.afficherGrille();
+
     }
 
     /**
