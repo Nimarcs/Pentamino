@@ -40,8 +40,8 @@ public class TestPiece {
         Carre c5 = carres.get(4);
         Assert.assertEquals("carre au mauvais endroit", 0, c1.getX());
         Assert.assertEquals("carre au mauvais endroit", 0, c1.getY());
-        Assert.assertEquals("carre au mauvais endroit", 2, c5.getX());
-        Assert.assertEquals("carre au mauvais endroit", 1, c5.getY());
+        Assert.assertEquals("carre au mauvais endroit", 1, c5.getX());
+        Assert.assertEquals("carre au mauvais endroit", 2, c5.getY());
 
     }
 
