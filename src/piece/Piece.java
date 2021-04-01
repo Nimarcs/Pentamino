@@ -15,6 +15,7 @@ public class Piece {
 
     /**
      * coordonnee du coin en haut a gauche de la piece
+     * x est ordonne, y est abscisse (a cause des tableau)
      */
     private int x, y;
 
@@ -97,15 +98,15 @@ public class Piece {
                     break;
                 case 13:
                     //retour chariot
-                    y++;
-                    x = 0;
+                    x++;
+                    y = 0;
                     break;
                 case 35:
                     //# represente un carre
                     carreList.add(new Carre(x, y));
                 case 95:
                     //_ represente du vide
-                    x++;
+                    y++;
                     break;
                 default:
                     throw new ValeurNonTraite((char) curChar);
