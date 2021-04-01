@@ -87,20 +87,14 @@ public class Partie {
         //On commence à placer la pièce
         List<Carre> carresPiece = piece.getCarres();
         for(Carre carre : carresPiece) {
+            int newX = x + carre.getX();
+            int newY = y + carre.getY();
             this.afficherGrille();
-            int newX = y + carre.getY();
-            int newY = x + carre.getX();
+            System.out.printf("[%s,%s]%n", newX, newY);
             if(!estDansGrille(newX, newY)) throw new PieceDebordeTerrain();
             if(this.grille[newX][newY] != '.') throw new PieceEmpietePiece();
             this.grille[newX][newY] = character;
         }
-    }
-
-    public static void main(String[] args) throws Exception {
-        Partie jeu = new Partie(10, 10);
-        jeu.ajouterPiece(0, 1, 3);
-        jeu.afficherGrille();
-
     }
 
     /**
