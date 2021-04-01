@@ -1,6 +1,7 @@
 package jeu;
 
-import exceptions.CoordonneeNegative;
+
+import exceptions.CoordonneeInvalide;
 
 public class Carre {
 
@@ -18,11 +19,11 @@ public class Carre {
      * @param pX abcsisse du carre
      * @param pY ordonnee du carre
      */
-    public Carre(int pX, int pY) throws CoordonneeNegative {
+    public Carre(int pX, int pY) throws CoordonneeInvalide {
         if (pX < 0)
-            throw new CoordonneeNegative(pX);
+            throw new CoordonneeInvalide(pX, pY);
         if (pY < 0)
-            throw new CoordonneeNegative(pY);
+            throw new CoordonneeInvalide(pX, pY);
         this.x = pX;
         this.y = pY;
     }
@@ -49,9 +50,9 @@ public class Carre {
      * setter de x
      * @param x nouvelle valeur de x
      */
-    public void setX(int x) throws CoordonneeNegative {
+    public void setX(int x) throws CoordonneeInvalide {
         if (x < 0)
-            throw new CoordonneeNegative(x);
+            throw new CoordonneeInvalide(x, this.y);
         this.x = x;
     }
 
@@ -59,10 +60,18 @@ public class Carre {
      * setter de y
      * @param y nouvelle valeur de y
      */
-    public void setY(int y) throws CoordonneeNegative {
+    public void setY(int y) throws CoordonneeInvalide {
         if (y < 0)
-            throw new CoordonneeNegative(y);
+            throw new CoordonneeInvalide(this.x, y);
         this.y = y;
+    }
+
+    @Override
+    public String toString() {
+        return "Carre{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
     }
 
     //methodes
