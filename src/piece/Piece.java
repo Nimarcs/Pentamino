@@ -1,5 +1,7 @@
 package piece;
+import exceptions.CharInvalide;
 import exceptions.CoordonneeInvalide;
+import exceptions.ValeurNonTraite;
 import jeu.Carre;
 
 import java.io.FileReader;
@@ -27,7 +29,7 @@ public class Piece {
     private List<Carre> carres;
 
     //constructeurs
-    public Piece (int pX, int pY, char pLettre, String nomFichier) throws Exception{
+    public Piece (int pX, int pY, char pLettre, String nomFichier) throws CoordonneeInvalide, IOException, CharInvalide, ValeurNonTraite {
 
         //coordonnees
         if (pX < 0)
@@ -39,7 +41,7 @@ public class Piece {
 
         //lettre
         if (!Character.isLetter(pLettre)){
-            throw new Exception("Le char n'est pas une lettre");
+            throw new CharInvalide(pLettre);
         }
         this.lettre = Character.toUpperCase(pLettre);
         this.carres = lireFichier(nomFichier);
@@ -74,7 +76,7 @@ public class Piece {
      * @throws IOException erreur de lecture
      * @throws Exception erreur dans le fichier
      */
-    public static List<Carre> lireFichier(String nomFichier) throws IOException, Exception {
+    public static List<Carre> lireFichier(String nomFichier) throws IOException, CoordonneeInvalide, ValeurNonTraite {
 
         FileReader fileReader =  new FileReader(("fichiers/"+nomFichier));
 
@@ -106,7 +108,7 @@ public class Piece {
                     x++;
                     break;
                 default:
-                    throw new Exception ("Valeur non traite dans le fichier");
+                    throw new ValeurNonTraite((char) curChar);
             }
         }
 
