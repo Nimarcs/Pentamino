@@ -1,6 +1,6 @@
 package test;
 
-import exceptions.CoordonneeNegative;
+import exceptions.CoordonneeInvalide;
 import jeu.Carre;
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,7 +19,7 @@ public class TestPiece {
 
     }
 
-    @Test (expected = CoordonneeNegative.class)
+    @Test (expected = CoordonneeInvalide.class)
     public void test02_carre_negatif() throws Exception {
 
         Carre c = new Carre(-7, 6);
