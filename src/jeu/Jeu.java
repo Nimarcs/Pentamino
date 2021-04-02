@@ -1,9 +1,9 @@
 package jeu;
 
-import commandes.AideCommande;
-import commandes.Commande;
+import commandes.*;
 import exceptions.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -11,10 +11,8 @@ import java.util.Scanner;
 public class Jeu {
 
     private List<Joueur> joueurList;
-
-    public Jeu(){
-        //a faire
-    }
+    private Partie partie;
+    private boolean estFinis;
 
     private List<Commande> commandes;
     private static Scanner scanner = new Scanner(System.in);
@@ -23,41 +21,29 @@ public class Jeu {
         this.enregistrerCommandes();
     }
 
+    public void finirJeu() {
+        this.estFinis = true;
+    }
+
     private void enregistrerCommandes() {
         this.commandes = new ArrayList<Commande>();
         commandes.add(new AideCommande(this.commandes));
+        commandes.add(new FinCommande(this));
+        commandes.add(new AjouterCommande(this));
+        commandes.add(new AfficherPieceCommande(this.partie.getPieceAPoser()));
     }
 
     private void executerCommande(String commandeStr) {
         for (Commande commande : this.commandes) {
-            if(commande.getAlias().equalsIgnoreCase(commandeStr)) commande.executer();
+            if(commande.getAlias().equalsIgnoreCase(commandeStr)) commande.executer(commandeStr.split(" "));
         }
     }
 
-    public void lancerJeu() {
-        boolean isEnd = false;
-        Partie partie = null;
-
-
-        String chargerOuNew = recupEntree(new String[] {"N", "n", "C", "c"}, "N pour creer une nouvelle partie, C pour tenter d'en charger une");
-        if (chargerOuNew.toUpperCase() == "N") {
-            //creation de la partie
-            try {
-                partie = new Partie(10, 10);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            //chargement de la partie
-            try {
-                //c'est ici qu'il faut appeler la methode qui charge
-            } catch ( Exception e) {
-                e.printStackTrace();
-            }
-        }
-
+    public void lancerJeu() throws DimensionsInvalide, CharInvalide, CoordonneeInvalide, IOException, ValeurNonTraite {
         //boucle jusqu'a la fin des tours
-        while (!isEnd) {
+        this.partie = new Partie(10, 10);
+        this.enregistrerCommandes();
+        while (!this.estFinis) {
             System.out.println("Entrez une commande (taper \"aide\" pour une liste de commandes)");
             String commande = scanner.nextLine();
             this.executerCommande(commande);
