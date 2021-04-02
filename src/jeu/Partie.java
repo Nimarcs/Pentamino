@@ -26,7 +26,7 @@ public class Partie {
      */
     private List<Piece> pieceAPoser;
 
-    public Partie(int x, int y) throws Exception {
+    public Partie(int x, int y) throws DimensionsInvalide, ValeurNonTraite, CharInvalide, CoordonneeInvalide, IOException {
         //Par convention, l'origine [(0, 0)] est en haut à gauche
         if(x < 0 || y < 0) throw new DimensionsInvalide(x, y);
         this.grille = new char[x][y];
@@ -59,7 +59,7 @@ public class Partie {
     /**
      * Méthode remplissant aléatoirement la liste des pièces à poser
      */
-    private void remplirAleatoirementPieceAPoser() throws Exception {
+    private void remplirAleatoirementPieceAPoser() throws IOException, CharInvalide, CoordonneeInvalide, ValeurNonTraite {
         this.pieceAPoser = new ArrayList<Piece>();
         this.pieceAPoser.add(new U(0, 0));
     }
