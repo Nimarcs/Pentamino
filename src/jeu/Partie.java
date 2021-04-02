@@ -89,8 +89,6 @@ public class Partie {
         for(Carre carre : carresPiece) {
             int newX = x + carre.getX();
             int newY = y + carre.getY();
-            this.afficherGrille();
-            System.out.printf("[%s,%s]%n", newX, newY);
             if(!estDansGrille(newX, newY)) throw new PieceDebordeTerrain();
             if(this.grille[newX][newY] != '.') throw new PieceEmpietePiece();
             this.grille[newX][newY] = character;
