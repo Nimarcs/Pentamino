@@ -18,7 +18,7 @@ public class Jeu {
     private static Scanner scanner = new Scanner(System.in);
 
     public Jeu() {
-        this.enregistrerCommandes();
+        this.estFinis = false;
     }
 
     public void finirJeu() {
