@@ -1,23 +1,21 @@
 package commandes;
 
-import piece.Piece;
-
-import java.util.List;
+import jeu.Partie;
 
 public class AfficherPieceCommande extends Commande {
 
-    private final List<Piece> pieces;
+    private final Partie partie;
 
-    public AfficherPieceCommande(List<Piece> pieces) {
+    public AfficherPieceCommande(Partie partie) {
         super("afficher_piece");
-        this.pieces = pieces;
+        this.partie = partie;
     }
 
     @Override
     public void executer(String[] args) {
         System.out.println("Listes de toutes les pièces disponibles à leur indice respectif:");
-        for (int i = 0; i < this.pieces.size(); i++) {
-            System.out.printf(" -(%s) %s%n", i, this.pieces.get(i));
+        for (int i = 0; i < this.partie.getPieceAPoser().size(); i++) {
+            System.out.printf(" -(%s) %s%n", i, this.partie.getPieceAPoser().get(i));
         }
     }
 
