@@ -29,13 +29,15 @@ public class Jeu {
         this.commandes = new ArrayList<Commande>();
         commandes.add(new AideCommande(this.commandes));
         commandes.add(new FinCommande(this));
-        commandes.add(new AjouterCommande(this));
-        commandes.add(new AfficherPieceCommande(this.partie.getPieceAPoser()));
+        commandes.add(new AjouterPieceCommande(this.partie));
+        commandes.add(new AfficherPieceCommande(this.partie));
+        commandes.add(new AfficherGrilleCommande(this.partie));
     }
 
     private void executerCommande(String commandeStr) {
+        String[] commandeDonnee = commandeStr.split(" ");
         for (Commande commande : this.commandes) {
-            if(commande.getAlias().equalsIgnoreCase(commandeStr)) commande.executer(commandeStr.split(" "));
+            if(commande.getAlias().equalsIgnoreCase(commandeDonnee[0])) commande.executer(commandeDonnee);
         }
     }
 
@@ -48,33 +50,6 @@ public class Jeu {
             String commande = scanner.nextLine();
             this.executerCommande(commande);
         }
-    }
-
-    public static String recupEntree(String[] valAttendu, String valDemande){
-        Scanner sc = new Scanner(System.in);
-        boolean estValAttendu = false;
-        String val = "";
-
-        while (! estValAttendu){
-            System.out.println("Inscrivez " + valDemande);
-            val = sc.next();
-            int i = 0;
-            boolean trouve = false;
-            while (i < valAttendu.length && !trouve ){
-                if (valAttendu[i] == val){
-                    trouve = true;
-                    estValAttendu = true;
-                }
-                i++;
-            }
-            if (!trouve){
-                System.out.println("Valeur errone ressayer");
-            }
-
-        }
-
-        return val;
-
     }
 
     public static void main(String[] args) {
