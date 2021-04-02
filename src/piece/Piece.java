@@ -119,10 +119,7 @@ public class Piece {
 
     @Override
     public String toString() {
-        return "Piece{" +
-                "  lettre=" + lettre +
-                ", carres=" + carres +
-                '}';
+        return String.valueOf(this.getLettre());
     }
 
     @Override
