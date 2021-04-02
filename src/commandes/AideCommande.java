@@ -16,6 +16,7 @@ public class AideCommande extends Commande {
         for (Commande commande : this.commandes) {
             commande.afficherAide();
         }
+        System.out.println();
     }
 
     public void afficherAide() {
