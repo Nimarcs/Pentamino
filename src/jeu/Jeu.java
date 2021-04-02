@@ -79,7 +79,11 @@ public class Jeu {
 
     public static void main(String[] args) {
         Jeu jeu = new Jeu();
-        jeu.lancerJeu();
+        try {
+            jeu.lancerJeu();
+        } catch (DimensionsInvalide | CharInvalide | CoordonneeInvalide | IOException | ValeurNonTraite dimensionsInvalide) {
+            dimensionsInvalide.printStackTrace();
+        }
     }
 
 }
