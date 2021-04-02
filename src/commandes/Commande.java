@@ -8,7 +8,7 @@ public abstract class Commande {
         this.alias = alias;
     }
 
-    public abstract void executer();
+    public abstract void executer(String[] args);
     public abstract void afficherAide();
 
     @Override
