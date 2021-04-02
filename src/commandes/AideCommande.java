@@ -11,13 +11,14 @@ public class AideCommande extends Commande {
         this.commandes = commandes;
     }
 
-    public void executer() {
+    public void executer(String[] args) {
+        System.out.println("Liste de toutes les commandes:");
         for (Commande commande : this.commandes) {
             commande.afficherAide();
         }
     }
 
     public void afficherAide() {
-        System.out.println("aide: Affiche toutes les commandes");
+        System.out.println(" -aide: Affiche toutes les commandes.");
     }
 }
