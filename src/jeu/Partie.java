@@ -26,6 +26,16 @@ public class Partie {
      */
     private List<Piece> pieceAPoser;
 
+    /**
+     * Constructeur de Partie
+     * @param x taille de l'ordonnee de la grille doit etre positive
+     * @param y taille de l'abscisse de la grille doit etre positive
+     * @throws DimensionsInvalide renvoye si x ou y est negatif
+     * @throws ValeurNonTraite renvoye en cas d'erreur dans remplirAleatoirementPieceAPoser
+     * @throws CharInvalide renvoye en cas d'erreur dans remplirAleatoirementPieceAPoser
+     * @throws CoordonneeInvalide renvoye en cas d'erreur dans remplirAleatoirementPieceAPoser
+     * @throws IOException renvoye en cas d'erreur dans remplirAleatoirementPieceAPoser
+     */
     public Partie(int x, int y) throws DimensionsInvalide, ValeurNonTraite, CharInvalide, CoordonneeInvalide, IOException {
         //Par convention, l'origine [(0, 0)] est en haut à gauche
         if(x < 0 || y < 0) throw new DimensionsInvalide(x, y);
@@ -35,10 +45,22 @@ public class Partie {
         this.remplirAleatoirementPieceAPoser();
     }
 
+    /**
+     * methode qui verfie si la position de la piece est valide
+     * @param x position sur l'ordonnee
+     * @param y position sur l'abscisse
+     * @throws CoordonneeInvalide renvoye si la piece n'est pas dans la grille
+     */
     private void testCoordonnee(int x, int y) throws CoordonneeInvalide {
         if(!this.estDansGrille(x, y)) throw new CoordonneeInvalide(x, y);
     }
 
+    /**
+     * methode qui verifie si les coordonnees sont dans la grille
+     * @param x position sur l'ordonnee
+     * @param y position sur l'abscisse
+     * @return booleen a valeur true si les coordonee sont dans la grille, false sinon
+     */
     private boolean estDansGrille(int x, int y) {
         if(x < 0) return false;
         if(y < 0) return false;
@@ -78,12 +100,32 @@ public class Partie {
         }
     }
 
+    /**
+     * methode permettant de poser une piece sur la grille
+     * la piece doit etre dans pieceAPoser
+     * @param n index de la piece dans pieceAPoser
+     * @param x position sur l'ordonnee
+     * @param y position sur l'abscisse
+     * @throws NumeroInconnue renvoye si n est invalide
+     * @throws CoordonneeInvalide renvoye si l'on essaye de poser la piece hors du terrain
+     * @throws CaseDejaOccupe renvoye si la case est deja occupe par une autre piece
+     * @throws PieceEmpietePiece renvoye si une partie de la piece superpose une piece deja pose
+     * @throws PieceDebordeTerrain renvoye si une partie de la piece deborde de la grille
+     */
     public void ajouterPiece(int n, int x, int y) throws NumeroInconnue, CoordonneeInvalide, CaseDejaOccupe, PieceEmpietePiece, PieceDebordeTerrain {
+
+        //verifications initiales
         this.testCoordonnee(x, y);
         if(this.pieceAPoser.size() < n) throw new NumeroInconnue(n);
+
+        //recuperation des valeurs
         Piece piece = this.pieceAPoser.get(n);
         char character = piece.getLettre();
+
+        //verification
+        //TODO CaseDejaOccupe ne marche pas
         if(this.grille[x][y] == character) throw new CaseDejaOccupe(x, y, character);
+
         //On commence à placer la pièce
         List<Carre> carresPiece = piece.getCarres();
         for(Carre carre : carresPiece) {
@@ -101,5 +143,13 @@ public class Partie {
      */
     public List<Piece> getPieceAPoser() {
         return pieceAPoser;
+    }
+
+    /**
+     * getter de grille
+     * @return grille de jeu
+     */
+    public char[][] getGrille() {
+        return grille;
     }
 }
