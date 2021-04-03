@@ -40,6 +40,10 @@ public class Jeu {
      */
     public Jeu() {
         this.estFinis = false;
+        this.joueurList = new ArrayList<Joueur>();
+        this.partie = null; //pas de partie a l'origine
+        this.commandes = new ArrayList<Commande>();
+        //les commandes ont besoin de Partie definit
     }
 
     //methodes
