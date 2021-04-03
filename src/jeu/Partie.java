@@ -81,6 +81,7 @@ public class Partie {
      * Méthode remplissant aléatoirement la liste des pièces à poser
      */
     private void remplirAleatoirementPieceAPoser() throws IOException, CharInvalide, CoordonneeInvalide, ValeurNonTraite {
+        //TODO
         this.pieceAPoser = new ArrayList<Piece>();
         this.pieceAPoser.add(new U(0, 0));
     }
