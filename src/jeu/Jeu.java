@@ -68,9 +68,13 @@ public class Jeu {
      * @param commandeStr nom de la commande
      */
     private void executerCommande(String commandeStr) {
-        String[] commandeDonnee = commandeStr.split(" ");
-        for (Commande commande : this.commandes) {
-            if(commande.getAlias().equalsIgnoreCase(commandeDonnee[0])) commande.executer(commandeDonnee);
+        if (commandeStr != null) {
+
+            String[] commandeDonnee = commandeStr.split(" ");
+            for (Commande commande : this.commandes) {
+                if (commande.getAlias().equalsIgnoreCase(commandeDonnee[0])) commande.executer(commandeDonnee);
+            }
+
         }
     }
 
