@@ -31,7 +31,6 @@ public class Jeu {
      * liste des commandes disponible pour jouer
      */
     private List<Commande> commandes;
-    private static Scanner scanner = new Scanner(System.in);
 
 
     //constructeur
