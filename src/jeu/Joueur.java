@@ -1,16 +1,21 @@
 package jeu;
 
+import exceptions.PartieInconnue;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Joueur {
 
     //attributs
 
-    private Partie[] parties;
+    private List<Partie> parties;
 
     private int score;
 
     //contructeurs
     public Joueur(){
-        this.parties = new Partie[0];
+        this.parties = new ArrayList<Partie>();
         this.score = 0;
     }
 
@@ -20,13 +25,13 @@ public abstract class Joueur {
         return this.score;
     }
 
-    public Partie[] getParties() {
+    public List<Partie> getParties() {
         return this.parties;
     }
 
-    public Partie getPartie(int index){
-        if (index < this.parties.length && index > 0){
-            return this.parties[index];
+    public Partie getPartie(int index) throws PartieInconnue {
+        if (index < this.parties.size() && index > 0){
+            return this.parties.get(index);
         } else{
             return null;
         }
@@ -41,20 +46,14 @@ public abstract class Joueur {
     //methodes
 
     public void ajouterPartie(Partie partie){
-        Partie[] temp = new Partie[this.parties.length +1];
-
-        for (int i = 0; i < this.parties.length; i++){
-            temp[i] = this.parties[i];
-        }
-
-        //TODO que faire si partie est null ?
-        temp[temp.length -1] = partie;
-
-        this.parties = temp;
-
+        this.parties.add(partie);
     }
 
     public abstract void calculerScore();
+
+    public abstract void ajouterPiece(int num, int x, int y);
+
+
 
 
 }
