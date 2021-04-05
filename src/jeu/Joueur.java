@@ -69,6 +69,8 @@ public abstract class Joueur implements Comparable<Joueur> {
 
     public abstract void calculerScore();
 
+    public abstract void ajouterPiece(int num, int x, int y);
+
     @Override
     public String toString() {
         return this.prenom + " (" + this.score + ")";
