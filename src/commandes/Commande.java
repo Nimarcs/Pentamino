@@ -1,5 +1,7 @@
 package commandes;
 
+import jeu.Joueur;
+
 public abstract class Commande {
 
     private String alias;
@@ -8,7 +10,6 @@ public abstract class Commande {
         this.alias = alias;
     }
 
-    public abstract void executer(String[] args);
     public abstract void afficherAide();
 
     @Override
