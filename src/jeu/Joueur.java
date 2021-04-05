@@ -1,64 +1,69 @@
 package jeu;
 
-import commandes.Commande;
+import exceptions.*;
 
-import java.util.Arrays;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Joueur implements Comparable<Joueur> {
 
     //attributs
 
-    private Partie[] parties;
+    private List<Partie> parties;
+
+    private double score;
 
     private String prenom;
 
-    private int score;
-
     //contructeurs
-    public Joueur(String prenom) {
+    public Joueur(){
         this.prenom = prenom;
-        this.parties = new Partie[0];
+        this.parties = new ArrayList<Partie>();
         this.score = 0;
     }
 
     //getter et setter
 
-    public int getScore() {
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public double getScore() {
         return this.score;
     }
 
-    public Partie[] getParties() {
+    protected void setScore(double score) {
+        this.score = score;
+    }
+
+    public List<Partie> getParties() {
         return this.parties;
     }
 
-    public Partie getPartie(int index){
-        if (index < this.parties.length && index > 0){
-            return this.parties[index];
+    public Partie getPartie(int index) throws PartieInconnue {
+        if (index < this.parties.size() && index > 0){
+            return this.parties.get(index);
         } else{
-            return null;
+            throw new PartieInconnue(index);
         }
     }
 
-    public Partie getLastPartie(){
-        if (this.parties.length == 0)
-            return null;
-        return this.parties[this.parties.length -1];
+    public Partie getLastPartie() throws PartieInconnue {
+        if (this.parties.size() == 0)
+            throw new PartieInconnue(-1);
+        return this.parties.get(this.parties.size() -1);
     }
 
     //methodes
 
-    public void ajouterPartie(Partie partie){
-        Partie[] temp = new Partie[this.parties.length + 1];
+    public abstract void calculerScore();
 
-        for (int i = 0; i < this.parties.length; i++){
-            temp[i] = this.parties[i];
-        }
+    public abstract void ajouterPiece(int num, int x, int y);
 
-        //TODO que faire si partie est null ?
-        temp[temp.length -1] = partie;
-
-        this.parties = temp;
-
+    public void creerPartie(int x , int y) throws DimensionsInvalide, CharInvalide, CoordonneeInvalide, IOException, ValeurNonTraite {
+        Partie partie = new Partie(x, y);
+        this.parties.add(partie);
     }
 
     public int compareTo(Joueur o) {
@@ -67,16 +72,9 @@ public abstract class Joueur implements Comparable<Joueur> {
         return -1;
     }
 
-    public abstract void calculerScore();
-
-    public abstract void ajouterPiece(int num, int x, int y);
-
     @Override
     public String toString() {
         return this.prenom + " (" + this.score + ")";
     }
 
-    public String getPrenom() {
-        return prenom;
-    }
 }
