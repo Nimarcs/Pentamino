@@ -8,8 +8,8 @@ public class JoueurAvance extends Joueur{
 
     //constructeurs
 
-    public JoueurAvance(){
-        super();
+    public JoueurAvance(String prenom){
+        super(prenom);
     }
 
     //methodes
@@ -33,10 +33,10 @@ public class JoueurAvance extends Joueur{
             caseDejaOccupe.printStackTrace();
         } catch (NumeroInconnue numeroInconnue) {
             numeroInconnue.printStackTrace();
-        } catch (PartieInconnue partieInconnue) {
-            partieInconnue.printStackTrace();
         } catch (CoordonneeInvalide coordonneeInvalide) {
             coordonneeInvalide.printStackTrace();
+        } catch (PartieInconnue partieInconnue) {
+            partieInconnue.printStackTrace();
         }
     }
 }

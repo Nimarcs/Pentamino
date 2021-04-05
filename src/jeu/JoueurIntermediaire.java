@@ -8,8 +8,8 @@ public class JoueurIntermediaire extends Joueur {
 
     //constructeurs
 
-    public JoueurIntermediaire(){
-        super();
+    public JoueurIntermediaire(String prenom){
+        super(prenom);
     }
 
     //methodes

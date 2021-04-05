@@ -8,8 +8,8 @@ public class JoueurDebutant extends Joueur {
 
     //contructeurs
 
-    public JoueurDebutant(){
-        super();
+    public JoueurDebutant(String prenom){
+        super(prenom);
     }
 
     //methodes

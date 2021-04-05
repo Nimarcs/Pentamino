@@ -17,7 +17,7 @@ public abstract class Joueur implements Comparable<Joueur> {
     private String prenom;
 
     //contructeurs
-    public Joueur(){
+    public Joueur(String prenom){
         this.prenom = prenom;
         this.parties = new ArrayList<Partie>();
         this.score = 0;
