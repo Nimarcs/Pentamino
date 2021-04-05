@@ -12,7 +12,7 @@ public abstract class Joueur {
 
     private List<Partie> parties;
 
-    private int score;
+    private double score;
 
     //contructeurs
     public Joueur(){
@@ -22,7 +22,7 @@ public abstract class Joueur {
 
     //getter et setter
 
-    public int getScore() {
+    public double getScore() {
         return this.score;
     }
 
