@@ -26,6 +26,10 @@ public abstract class Joueur {
         return this.score;
     }
 
+    protected void setScore(double score) {
+        this.score = score;
+    }
+
     public List<Partie> getParties() {
         return this.parties;
     }
