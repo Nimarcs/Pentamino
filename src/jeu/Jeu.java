@@ -1,6 +1,10 @@
 package jeu;
 
 import commandes.*;
+import commandes.jeu.AideJeuCommande;
+import commandes.jeu.ChoisirJoueurCommande;
+import commandes.jeu.CommandeJeu;
+import commandes.partie.*;
 import exceptions.*;
 
 import java.io.IOException;
@@ -15,12 +19,11 @@ public class Jeu {
     /**
      * liste des joueurs
      */
-    private List<Joueur> joueurList;
+    private List<Joueur> joueurs;
 
-    /**
-     * partie en cours
-     */
-    private Partie partie;
+    private int indiceJoueurCourant;
+
+    public void setJoueurCourant(int indice) { this.indiceJoueurCourant = indice; }
 
     /**
      * signale la fin d'une partie
@@ -30,7 +33,12 @@ public class Jeu {
     /**
      * liste des commandes disponible pour jouer
      */
-    private List<Commande> commandes;
+    private List<CommandePartie> commandesPartie;
+
+    /**
+     * liste de commandes disponoble pour le jeu
+     */
+    private List<CommandeJeu> commandesJeu;
 
 
     //constructeur
@@ -39,10 +47,10 @@ public class Jeu {
      * constructeur vide de Jeu
      */
     public Jeu() {
+        this.indiceJoueurCourant = -1;
         this.estFinis = false;
-        this.joueurList = new ArrayList<Joueur>();
-        this.partie = null; //pas de partie a l'origine
-        this.commandes = new ArrayList<Commande>();
+        this.joueurs = new ArrayList<Joueur>();
+        this.commandesPartie = new ArrayList<Commande>();
         //les commandes ont besoin de Partie definit
     }
 
@@ -59,27 +67,15 @@ public class Jeu {
      * methode permettant de redefinir les commandes disponible
      */
     private void enregistrerCommandes() {
-        this.commandes = new ArrayList<Commande>();
-        commandes.add(new AideCommande(this.commandes));
-        commandes.add(new FinCommande(this));
-        commandes.add(new AjouterPieceCommande(this.partie));
-        commandes.add(new AfficherPieceCommande(this.partie));
-        commandes.add(new AfficherGrilleCommande(this.partie));
-    }
-
-    /**
-     * methode permettant d'executer une commande
-     * @param commandeStr nom de la commande
-     */
-    private void executerCommande(String commandeStr) {
-        if (commandeStr != null) {
-
-            String[] commandeDonnee = commandeStr.split(" ");
-            for (Commande commande : this.commandes) {
-                if (commande.getAlias().equalsIgnoreCase(commandeDonnee[0])) commande.executer(commandeDonnee);
-            }
-
-        }
+        this.commandesPartie = new ArrayList<CommandePartie>();
+        commandesPartie.add(new AidePartieCommande(this.commandesPartie));
+        commandesPartie.add(new FinPartieCommande(this));
+        commandesPartie.add(new PoserPieceCommande());
+        commandesPartie.add(new AfficherPiecesCommande());
+        commandesPartie.add(new AfficherGrilleCommande());
+        this.commandesJeu = new ArrayList<CommandeJeu>();
+        this.commandesJeu.add(new ChoisirJoueurCommande());
+        this.commandesJeu.add(new AideJeuCommande(this.commandesJeu));
     }
 
     /**
@@ -96,17 +92,31 @@ public class Jeu {
         Scanner scanner = new Scanner(System.in);
 
         //initialisation des valeurs necessaire
-        this.partie = new Partie(10, 10);
         this.enregistrerCommandes();
 
-        //TODO ajout des joueurs
+        //on prépare le jeu avec l'ajout/sélection des joueurs
+        while(this.indiceJoueurCourant == -1) {
+            System.out.println("Entrez une commande (taper \"aide\" pour une liste de commandes)");
+        }
 
         //boucle jusqu'a la fin des tours
         while (!this.estFinis) {
             System.out.println("Entrez une commande (taper \"aide\" pour une liste de commandes)");
             String commande = scanner.nextLine();
-            this.executerCommande(commande);
+            this.executerCommandeJeu(commande);
+        }
+    }
 
+    /**
+     * methode permettant d'executer une commande
+     * @param commandeStr nom de la commande
+     */
+    private void executerCommandeJeu(String commandeStr) {
+        if (commandeStr != null) {
+            String[] commandeDonnee = commandeStr.split(" ");
+            for (CommandeJeu commande : this.commandesJeu) {
+                if (commande.getAlias().equalsIgnoreCase(commandeDonnee[0])) commande.executer(commandeDonnee, this);
+            }
         }
     }
 
@@ -118,10 +128,25 @@ public class Jeu {
         Jeu jeu = new Jeu();
         try {
             jeu.lancerJeu();
-        } catch (DimensionsInvalide | CharInvalide | CoordonneeInvalide | IOException | ValeurNonTraite erreur) {
-            erreur.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (DimensionsInvalide dimensionsInvalide) {
+            dimensionsInvalide.printStackTrace();
+        } catch (CharInvalide charInvalide) {
+            charInvalide.printStackTrace();
+        } catch (ValeurNonTraite valeurNonTraite) {
+            valeurNonTraite.printStackTrace();
+        } catch (CoordonneeInvalide coordonneeInvalide) {
+            coordonneeInvalide.printStackTrace();
         }
-        
+
     }
 
+    public List<Joueur> getJoueurs() {
+        return joueurs;
+    }
+
+    public void setJoueurs(List<Joueur> joueurs) {
+        this.joueurs = joueurs;
+    }
 }
