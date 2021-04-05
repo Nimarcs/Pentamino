@@ -33,14 +33,14 @@ public abstract class Joueur {
         if (index < this.parties.size() && index > 0){
             return this.parties.get(index);
         } else{
-            return null;
+            throw new PartieInconnue(index);
         }
     }
 
-    public Partie getLastPartie(){
-        if (this.parties.length == 0)
-            return null;
-        return this.parties[this.parties.length -1];
+    public Partie getLastPartie() throws PartieInconnue {
+        if (this.parties.size() == 0)
+            throw new PartieInconnue(-1);
+        return this.parties.get(this.parties.size() -1);
     }
 
     //methodes
