@@ -1,7 +1,8 @@
 package jeu;
 
-import exceptions.PartieInconnue;
+import exceptions.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,13 +46,14 @@ public abstract class Joueur {
 
     //methodes
 
-    public void ajouterPartie(Partie partie){
-        this.parties.add(partie);
-    }
-
     public abstract void calculerScore();
 
     public abstract void ajouterPiece(int num, int x, int y);
+
+    public void creerPartie(int x , int y) throws DimensionsInvalide, CharInvalide, CoordonneeInvalide, IOException, ValeurNonTraite {
+        Partie partie = new Partie(x, y);
+        this.parties.add(partie);
+    }
 
 
 
