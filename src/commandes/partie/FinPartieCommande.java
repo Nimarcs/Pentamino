@@ -1,18 +1,19 @@
-package commandes;
+package commandes.partie;
 
 import jeu.Jeu;
+import jeu.Joueur;
 
-public class FinCommande extends Commande {
+public class FinPartieCommande extends CommandePartie {
 
     private Jeu jeu;
 
-    public FinCommande(Jeu jeu) {
+    public FinPartieCommande(Jeu jeu) {
         super("fin");
         this.jeu = jeu;
     }
 
     @Override
-    public void executer(String[] args) {
+    public void executer(String[] args, Joueur joueur) {
         //TODO: save in file
         this.jeu.finirJeu();
         System.out.println("Jeu finis.");
