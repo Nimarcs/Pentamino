@@ -18,7 +18,7 @@ public class JoueurIntermediaire extends Joueur {
         double score = 0;
         List<Partie> parties= this.getParties();
         for (int i = 0; i < parties.size(); i++){
-            score += parties.get(i).getScore() * 0.5;
+            score += parties.get(i).getScore() * 0.5;//0.5 multiplicateur car Intermediaire
         }
         this.setScore(score);
     }

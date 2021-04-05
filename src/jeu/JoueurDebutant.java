@@ -19,7 +19,7 @@ public class JoueurDebutant extends Joueur {
         double score = 0;
         List<Partie> parties= this.getParties();
         for (int i = 0; i < parties.size(); i++){
-            score += parties.get(i).getScore() * 0.25;
+            score += parties.get(i).getScore() * 0.25;//0.25 multiplicateur car debutant
         }
         this.setScore(score);
     }

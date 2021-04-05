@@ -18,7 +18,7 @@ public class JoueurAvance extends Joueur{
         double score = 0;
         List<Partie> parties= this.getParties();
         for (int i = 0; i < parties.size(); i++){
-            score += parties.get(i).getScore() * 1; 
+            score += parties.get(i).getScore() * 1; //1 multiplicateur car Avance
         }
         this.setScore(score);
     }
