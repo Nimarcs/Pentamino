@@ -26,6 +26,11 @@ public class Partie {
     private List<Piece> pieceAPoser;
 
     /**
+     * score de la partie
+     */
+    private int score;
+
+    /**
      * Constructeur de Partie
      * @param x taille de l'ordonnee de la grille doit etre positive
      * @param y taille de l'abscisse de la grille doit etre positive
@@ -114,6 +119,8 @@ public class Partie {
      */
     public void ajouterPiece(int n, int x, int y) throws NumeroInconnue, CoordonneeInvalide, CaseDejaOccupe, PieceEmpietePiece, PieceDebordeTerrain {
 
+        //TODO modifier score
+
         //verifications initiales
         this.testCoordonnee(x, y);
         if(this.pieceAPoser.size() < n) throw new NumeroInconnue(n);
@@ -151,5 +158,13 @@ public class Partie {
      */
     public char[][] getGrille() {
         return grille;
+    }
+
+    /**
+     * getter de score
+     * @return score de la partie
+     */
+    public int getScore() {
+        return score;
     }
 }
