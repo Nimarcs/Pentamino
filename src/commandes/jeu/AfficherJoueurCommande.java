@@ -1,4 +1,4 @@
-package commandes.partie;
+package commandes.jeu;
 
 import commandes.jeu.CommandeJeu;
 import jeu.Jeu;
