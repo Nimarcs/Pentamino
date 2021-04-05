@@ -1,5 +1,6 @@
 package commandes.partie;
 
+import exceptions.PartieInconnue;
 import jeu.Joueur;
 import jeu.Partie;
 
@@ -12,7 +13,13 @@ public class AfficherPiecesCommande extends CommandePartie {
 
     @Override
     public void executer(String[] args, Joueur joueur) {
-        Partie partie = joueur.getLastPartie();
+        Partie partie;
+        try {
+            partie = joueur.getLastPartie();
+        } catch (PartieInconnue partieInconnue) {
+            partieInconnue.printStackTrace();
+            return;
+        }
         System.out.println("Listes de toutes les pièces disponibles à leur indice respectif:");
         for (int i = 0; i < partie.getPieceAPoser().size(); i++) {
             System.out.printf(" -(%s) %s%n", i, partie.getPieceAPoser().get(i));

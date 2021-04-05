@@ -16,15 +16,14 @@ public class ChoisirJoueurCommande extends CommandeJeu {
     @Override
     public void executer(String[] args, Jeu jeu) {
         if(args.length < 2) {
-            this.afficherAide();
+            super.erreur("Pas assez d'arguments");
             return;
         }
         try {
             int indice = Integer.parseInt(args[1]);
             jeu.setJoueurCourant(indice);
         } catch (NumberFormatException ignored) {
-            System.out.println("Erreur: " + args[1] + " n'est pas un entier");
-            this.afficherAide();
+            super.erreur(args[1] + " n'est pas un entier");
         }
     }
 }

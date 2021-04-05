@@ -1,5 +1,6 @@
 package commandes.partie;
 
+import exceptions.PartieInconnue;
 import jeu.Joueur;
 
 import java.util.Arrays;
@@ -13,7 +14,7 @@ public class PoserPieceCommande extends CommandePartie {
     public void executer(String[] args, Joueur joueur) {
         System.out.println(Arrays.toString(args));
         if(args.length < 4) {
-            this.afficherAide();
+            super.erreur("Pas assez d'arguments.");
             return;
         }
         try {
@@ -21,10 +22,13 @@ public class PoserPieceCommande extends CommandePartie {
             int posX = Integer.parseInt(args[2]);
             int posY = Integer.parseInt(args[3]);
             joueur.ajouterPiece(numPiece, posX, posY);
-            joueur.getLastPartie().afficherGrille();
+            try {
+                joueur.getLastPartie().afficherGrille();
+            } catch (PartieInconnue partieInconnue) {
+                partieInconnue.printStackTrace();
+            }
         } catch (NumberFormatException ignored) {
-            System.out.println("Erreur: Mauvais format pour les arguments");
-            this.afficherAide();
+            super.erreur("Mauvais format pour les arguments.");
         }
     }
 

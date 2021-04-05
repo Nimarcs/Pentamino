@@ -1,5 +1,6 @@
 package commandes.partie;
 
+import exceptions.PartieInconnue;
 import jeu.Joueur;
 
 public class AfficherGrilleCommande extends CommandePartie {
@@ -10,7 +11,11 @@ public class AfficherGrilleCommande extends CommandePartie {
 
     @Override
     public void executer(String[] args, Joueur joueur) {
-        joueur.getLastPartie().afficherGrille();
+        try {
+            joueur.getLastPartie().afficherGrille();
+        } catch (PartieInconnue partieInconnue) {
+            partieInconnue.printStackTrace();
+        }
     }
 
     @Override
