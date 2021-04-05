@@ -24,6 +24,11 @@ public abstract class Commande {
 
     public String getAlias() { return this.alias; }
 
+    public void erreur(String message) {
+        System.out.println("Erreur: " + message);
+        this.afficherAide();
+    }
+
     @Override
     public int hashCode() {
         return alias != null ? alias.hashCode() : 0;
