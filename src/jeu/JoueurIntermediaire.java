@@ -23,20 +23,17 @@ public class JoueurIntermediaire extends Joueur {
         this.setScore(score);
     }
 
-    public void ajouterPiece(int num, int x, int y) {
+    @Override
+    public void ajouterPiece(int num, int x, int y) throws CoordonneeInvalide, NumeroInconnue, PartieInconnue, PlacementInterdit {
+        Partie partie = this.getLastPartie();
         try {
-            this.getLastPartie().ajouterPiece(num, x, y);
-        } catch (PieceDebordeTerrain pieceDebordeTerrain) {
-            //autorise
-            pieceDebordeTerrain.printStackTrace();
+            partie.testerPosePiece(num, x, y);
+            partie.ajouterPiece(num, x, y);
+        } catch (PieceDebordeTerrain caseDejaOccupe) {
+            partie.ajouterPiece(num, x, y);
         } catch (CaseDejaOccupe caseDejaOccupe) {
-            caseDejaOccupe.printStackTrace();
-        } catch (NumeroInconnue numeroInconnue) {
-            numeroInconnue.printStackTrace();
-        } catch (PartieInconnue partieInconnue) {
-            partieInconnue.printStackTrace();
-        } catch (CoordonneeInvalide coordonneeInvalide) {
-            coordonneeInvalide.printStackTrace();
+            throw new PlacementInterdit("Vous ne pouvez pas superposer les pièces.");
         }
     }
+
 }

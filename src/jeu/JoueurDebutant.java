@@ -24,23 +24,15 @@ public class JoueurDebutant extends Joueur {
         this.setScore(score);
     }
 
-    public void ajouterPiece(int num, int x, int y) {
+    @Override
+    public void ajouterPiece(int num, int x, int y) throws CoordonneeInvalide, NumeroInconnue, PartieInconnue {
+        Partie partie = this.getLastPartie();
         try {
-            this.getLastPartie().ajouterPiece(num, x, y);
-        } catch (PieceDebordeTerrain pieceDebordeTerrain) {
-            //autorise
-            pieceDebordeTerrain.printStackTrace();
-        } catch (CaseDejaOccupe caseDejaOccupe) {
-            //autorise
-            caseDejaOccupe.printStackTrace();
-        } catch (NumeroInconnue numeroInconnue) {
-            numeroInconnue.printStackTrace();
-        } catch (PartieInconnue partieInconnue) {
-            partieInconnue.printStackTrace();
-        } catch (CoordonneeInvalide coordonneeInvalide) {
-            coordonneeInvalide.printStackTrace();
+            partie.testerPosePiece(num, x, y);
+            partie.ajouterPiece(num, x, y);
+        } catch (CaseDejaOccupe | PieceDebordeTerrain caseDejaOccupe) {
+            partie.ajouterPiece(num, x, y);
         }
-
     }
 
 

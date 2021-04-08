@@ -24,19 +24,15 @@ public class JoueurAvance extends Joueur{
     }
 
 
-    public void ajouterPiece(int num, int x, int y) {
+    public void ajouterPiece(int num, int x, int y) throws PartieInconnue, CoordonneeInvalide, NumeroInconnue, PlacementInterdit {
+        Partie partie = this.getLastPartie();
         try {
-            this.getLastPartie().ajouterPiece(num, x, y);
-        } catch (PieceDebordeTerrain pieceDebordeTerrain) {
-            pieceDebordeTerrain.printStackTrace();
+            partie.testerPosePiece(num, x, y);
+            partie.ajouterPiece(num, x, y);
+        } catch (PieceDebordeTerrain caseDejaOccupe) {
+            throw new PlacementInterdit("Vous ne pouvez pas avoir des pièces débordant du terrain.");
         } catch (CaseDejaOccupe caseDejaOccupe) {
-            caseDejaOccupe.printStackTrace();
-        } catch (NumeroInconnue numeroInconnue) {
-            numeroInconnue.printStackTrace();
-        } catch (CoordonneeInvalide coordonneeInvalide) {
-            coordonneeInvalide.printStackTrace();
-        } catch (PartieInconnue partieInconnue) {
-            partieInconnue.printStackTrace();
+            throw new PlacementInterdit("Vous ne pouvez pas superposer les pièces.");
         }
     }
 }
