@@ -1,7 +1,6 @@
 package jeu;
 
 import exceptions.*;
-import piece.L;
 import piece.Piece;
 import piece.U;
 
@@ -34,15 +33,14 @@ public class Partie {
      * Constructeur de Partie
      * @param x taille de l'ordonnee de la grille doit etre positive
      * @param y taille de l'abscisse de la grille doit etre positive
-     * @throws DimensionsInvalide renvoye si x ou y est negatif
      * @throws ValeurNonTraite renvoye en cas d'erreur dans remplirAleatoirementPieceAPoser
      * @throws CharInvalide renvoye en cas d'erreur dans remplirAleatoirementPieceAPoser
      * @throws CoordonneeInvalide renvoye en cas d'erreur dans remplirAleatoirementPieceAPoser
      * @throws IOException renvoye en cas d'erreur dans remplirAleatoirementPieceAPoser
      */
-    public Partie(int x, int y) throws DimensionsInvalide, ValeurNonTraite, CharInvalide, CoordonneeInvalide, IOException {
+    public Partie(int x, int y) throws ValeurNonTraite, CharInvalide, CoordonneeInvalide, IOException {
         //Par convention, l'origine [(0, 0)] est en haut à gauche
-        if(x < 0 || y < 0) throw new DimensionsInvalide(x, y);
+        if(x < 0 || y < 0) throw new CoordonneeInvalide(x, y);
         this.grille = new char[x][y];
         this.remplirGrille('.');
         this.piecePosees = new ArrayList<Piece>();
@@ -107,21 +105,21 @@ public class Partie {
 
     /**
      * methode permettant de poser une piece sur la grille
-     * la piece doit etre dans pieceAPoser
+     * la piece doit être dans pieceAPoser
      * @param n index de la piece dans pieceAPoser
      * @param x position sur l'ordonnee
      * @param y position sur l'abscisse
-     * @throws NumeroInconnue renvoye si n est invalide
-     * @throws CoordonneeInvalide renvoye si l'on essaye de poser la piece hors du terrain
-     * @throws CaseDejaOccupe renvoye si la case est deja occupe par une autre piece
-     * @throws PieceEmpietePiece renvoye si une partie de la piece superpose une piece deja pose
-     * @throws PieceDebordeTerrain renvoye si une partie de la piece deborde de la grille
+     * @throws NumeroInconnue renvoyé si n est invalide
+     * @throws CoordonneeInvalide renvoyé si l'on essaye de poser la piece hors du terrain
+     * @throws CaseDejaOccupe renvoyé si la case est deja occupé par une autre piece
+     * @throws PieceEmpietePiece renvoyé si une partie de la piece superpose une piece deja pose
+     * @throws PieceDebordeTerrain renvoyé si une partie de la piece déborde de la grille
      */
-    public void ajouterPiece(int n, int x, int y) throws NumeroInconnue, CoordonneeInvalide, CaseDejaOccupe, PieceEmpietePiece, PieceDebordeTerrain {
+    public void ajouterPiece(int n, int x, int y) throws NumeroInconnue, CoordonneeInvalide, CaseDejaOccupe, PieceDebordeTerrain {
 
         //TODO modifier score
 
-        //verifications initiales
+        //verifications initiales des coordonées
         this.testCoordonnee(x, y);
         if(this.pieceAPoser.size() < n) throw new NumeroInconnue(n);
 
@@ -129,17 +127,13 @@ public class Partie {
         Piece piece = this.pieceAPoser.get(n);
         char character = piece.getLettre();
 
-        //verification
-        //TODO CaseDejaOccupe ne marche pas
-        if(this.grille[x][y] == character) throw new CaseDejaOccupe(x, y, character);
-
         //On commence à placer la pièce
         List<Carre> carresPiece = piece.getCarres();
         for(Carre carre : carresPiece) {
             int newX = x + carre.getX();
             int newY = y + carre.getY();
             if(!estDansGrille(newX, newY)) throw new PieceDebordeTerrain();
-            if(this.grille[newX][newY] != '.') throw new PieceEmpietePiece();
+            if(this.grille[newX][newY] != '.') throw new CaseDejaOccupe(newX, newY, character);
             this.grille[newX][newY] = character;
         }
     }
