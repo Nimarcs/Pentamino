@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class PoserPieceCommande extends CommandePartie {
 
     public PoserPieceCommande() {
-        super("ajouter_piece");
+        super("poser_piece");
     }
 
     public void executer(String[] args, Joueur joueur) {
@@ -33,6 +33,6 @@ public class PoserPieceCommande extends CommandePartie {
     }
 
     public void afficherAide() {
-        System.out.println(" -ajouter_piece <numeroPiece> <x> <y>: ajoute une pièce à l'indice numeroPiece aux coordonées [x,y].");
+        System.out.println(" -poser_piece <numeroPiece> <x> <y>: ajoute une pièce à l'indice numeroPiece aux coordonées [x,y].");
     }
 }
