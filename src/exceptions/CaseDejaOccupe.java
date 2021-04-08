@@ -6,4 +6,8 @@ public class CaseDejaOccupe extends Exception {
         super(String.format("La position [%s, %s] est déjà occupé par %s", x, y, already));
     }
 
+    public CaseDejaOccupe() {
+        super("Une pièce empiète sur une autre pièce");
+    }
+
 }
