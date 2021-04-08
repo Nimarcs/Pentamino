@@ -1,5 +1,6 @@
 package jeu;
 
+import commandes.jeu.CommandeJeu;
 import exceptions.*;
 
 import java.io.IOException;
@@ -61,7 +62,7 @@ public abstract class Joueur implements Comparable<Joueur> {
 
     public abstract void ajouterPiece(int num, int x, int y);
 
-    public void creerPartie(int x , int y) throws DimensionsInvalide, CharInvalide, CoordonneeInvalide, IOException, ValeurNonTraite {
+    public void creerPartie(int x , int y) throws CharInvalide, CoordonneeInvalide, IOException, ValeurNonTraite {
         Partie partie = new Partie(x, y);
         this.parties.add(partie);
     }
