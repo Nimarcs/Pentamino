@@ -21,7 +21,11 @@ public class ChoisirJoueurCommande extends CommandeJeu {
         }
         try {
             int indice = Integer.parseInt(args[1]);
-            jeu.setJoueurCourant(indice);
+            if(!jeu.setJoueurCourant(indice)) {
+                super.erreur("Aucun joueur n'existe à l'indice: " + indice);
+            } else {
+                super.info("Sélection du joueur à l'indice: " + indice + " réussi.");
+            }
         } catch (NumberFormatException ignored) {
             super.erreur(args[1] + " n'est pas un entier");
         }
