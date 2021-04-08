@@ -104,7 +104,7 @@ public class Partie {
     }
 
     /**
-     * methode permettant de poser une piece sur la grille
+     * methode permettant de simuler une pose d'une piece sur la grille
      * la piece doit être dans pieceAPoser
      * @param n index de la piece dans pieceAPoser
      * @param x position sur l'ordonnee
@@ -115,14 +115,44 @@ public class Partie {
      * @throws PieceEmpietePiece renvoyé si une partie de la piece superpose une piece deja pose
      * @throws PieceDebordeTerrain renvoyé si une partie de la piece déborde de la grille
      */
-    public void ajouterPiece(int n, int x, int y) throws NumeroInconnue, CoordonneeInvalide, CaseDejaOccupe, PieceDebordeTerrain {
-
-        //TODO modifier score
-
-        //verifications initiales des coordonées
+    public void testerPosePiece(int n, int x, int y) throws NumeroInconnue, CoordonneeInvalide, CaseDejaOccupe, PieceDebordeTerrain {
+        //verifications initiales des coordonées et de l'existence de la pièce
         this.testCoordonnee(x, y);
-        if(this.pieceAPoser.size() < n) throw new NumeroInconnue(n);
+        this.testerPieceAPoserExiste(n);
 
+        //recuperation des valeurs
+        Piece piece = this.pieceAPoser.get(n);
+        char character = piece.getLettre();
+
+        if(this.piecePosees.contains(piece)) throw new CaseDejaOccupe(x, y, character);
+
+        boolean debordeTerrain = false, empietePiece = false;
+
+        List<Carre> carresPiece = piece.getCarres();
+        for(Carre carre : carresPiece) {
+            int newX = x + carre.getX();
+            int newY = y + carre.getY();
+            if(!estDansGrille(newX, newY)) debordeTerrain = true;
+            else if(this.grille[newX][newY] != '.') empietePiece = true;
+        }
+        if(empietePiece) throw new CaseDejaOccupe();
+        if(debordeTerrain) throw new PieceDebordeTerrain();
+    }
+
+    public void testerPieceAPoserExiste(int n) throws NumeroInconnue {
+        if(this.pieceAPoser.size() < n) throw new NumeroInconnue(n);
+    }
+
+    /**
+     * methode permettant de forcer la pose d'une piece sur la grille
+     * @param n index de la piece dans pieceAPoser
+     * @param x position sur l'ordonnee
+     * @param y position sur l'abscisse
+     */
+    public void ajouterPiece(int n, int x, int y) throws NumeroInconnue, CoordonneeInvalide {
+        this.testerPieceAPoserExiste(n);
+        this.testCoordonnee(x, y);
+        this.score++;
         //recuperation des valeurs
         Piece piece = this.pieceAPoser.get(n);
         char character = piece.getLettre();
@@ -132,8 +162,7 @@ public class Partie {
         for(Carre carre : carresPiece) {
             int newX = x + carre.getX();
             int newY = y + carre.getY();
-            if(!estDansGrille(newX, newY)) throw new PieceDebordeTerrain();
-            if(this.grille[newX][newY] != '.') throw new CaseDejaOccupe(newX, newY, character);
+            if(!estDansGrille(newX, newY)) continue;
             this.grille[newX][newY] = character;
         }
     }
