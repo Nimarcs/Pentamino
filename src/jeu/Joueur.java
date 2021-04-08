@@ -60,7 +60,7 @@ public abstract class Joueur implements Comparable<Joueur> {
 
     public abstract void calculerScore();
 
-    public abstract void ajouterPiece(int num, int x, int y);
+    public abstract void ajouterPiece(int num, int x, int y) throws CoordonneeInvalide, NumeroInconnue, PartieInconnue, PlacementInterdit;
 
     public void creerPartie(int x , int y) throws CharInvalide, CoordonneeInvalide, IOException, ValeurNonTraite {
         Partie partie = new Partie(x, y);
@@ -68,9 +68,7 @@ public abstract class Joueur implements Comparable<Joueur> {
     }
 
     public int compareTo(Joueur o) {
-        if(this.score > o.score) return 1;
-        if(this.score == o.score) return 0;
-        return -1;
+        return Double.compare(this.score, o.score);
     }
 
     @Override
