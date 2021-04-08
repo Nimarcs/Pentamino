@@ -1,6 +1,9 @@
 package commandes.partie;
 
+import exceptions.CoordonneeInvalide;
+import exceptions.NumeroInconnue;
 import exceptions.PartieInconnue;
+import exceptions.PlacementInterdit;
 import jeu.Joueur;
 
 import java.util.Arrays;
@@ -12,23 +15,29 @@ public class PoserPieceCommande extends CommandePartie {
     }
 
     public void executer(String[] args, Joueur joueur) {
-        System.out.println(Arrays.toString(args));
         if(args.length < 4) {
             super.erreur("Pas assez d'arguments.");
             return;
         }
+        int numPiece = -1, posX = -1, posY = -1;
         try {
-            int numPiece = Integer.parseInt(args[1]);
-            int posX = Integer.parseInt(args[2]);
-            int posY = Integer.parseInt(args[3]);
-            joueur.ajouterPiece(numPiece, posX, posY);
-            try {
-                joueur.getLastPartie().afficherGrille();
-            } catch (PartieInconnue partieInconnue) {
-                partieInconnue.printStackTrace();
-            }
+            numPiece = Integer.parseInt(args[1]);
+            posX = Integer.parseInt(args[2]);
+            posY = Integer.parseInt(args[3]);
         } catch (NumberFormatException ignored) {
             super.erreur("Mauvais format pour les arguments.");
+        }
+        try {
+            joueur.ajouterPiece(numPiece, posX, posY);
+            joueur.getLastPartie().afficherGrille();
+        } catch (CoordonneeInvalide coordonneeInvalide) {
+            super.erreur("Les coordonnées doivent être positives et inférieur à la taille de la grille.");
+        } catch (NumeroInconnue numeroInconnue) {
+            super.erreur("Le numéro de pièce fournit (" + numPiece + ") n'a pas de pièce associé.");
+        } catch (PartieInconnue partieInconnue) {
+            super.erreur("Echec en interne du chargement de la partie.");
+        } catch (PlacementInterdit placementInterdit) {
+            super.erreur(placementInterdit.getMessage());
         }
     }
 
