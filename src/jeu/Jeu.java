@@ -75,6 +75,7 @@ public class Jeu {
         this.commandesPartie.add(new PoserPieceCommande());
         this.commandesPartie.add(new AfficherPiecesCommande());
         this.commandesPartie.add(new AfficherGrilleCommande());
+        this.commandesPartie.add(new RetirerDernierPieceCommande());
 
         this.commandesJeu.add(new ChoisirJoueurCommande());
         this.commandesJeu.add(new AfficherJoueurCommande());
