@@ -2,7 +2,6 @@ package piece;
 import exceptions.CharInvalide;
 import exceptions.CoordonneeInvalide;
 import exceptions.ValeurNonTraite;
-import jeu.Carre;
 
 import java.io.FileReader;
 import java.io.IOException;

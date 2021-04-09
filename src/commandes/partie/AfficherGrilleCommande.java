@@ -1,7 +1,7 @@
 package commandes.partie;
 
 import exceptions.PartieInconnue;
-import jeu.Joueur;
+import partie.Joueur;
 
 public class AfficherGrilleCommande extends CommandePartie {
 

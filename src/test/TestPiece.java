@@ -1,7 +1,7 @@
 package test;
 
 import exceptions.CoordonneeInvalide;
-import jeu.Carre;
+import piece.Carre;
 import org.junit.Assert;
 import org.junit.Test;
 import piece.U;

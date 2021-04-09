@@ -1,8 +1,7 @@
 package commandes.jeu;
 
-import commandes.jeu.CommandeJeu;
 import jeu.Jeu;
-import jeu.Joueur;
+import partie.Joueur;
 
 import java.util.Collections;
 import java.util.Comparator;

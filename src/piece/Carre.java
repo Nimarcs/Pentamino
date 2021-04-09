@@ -1,4 +1,4 @@
-package jeu;
+package piece;
 
 
 import exceptions.CoordonneeInvalide;
@@ -15,7 +15,7 @@ public class Carre {
     //Contructeurs
 
     /**
-     * Contructeur de jeu.Carre
+     * Contructeur de piece.Carre
      * @param pX abcsisse du carre
      * @param pY ordonnee du carre
      */
