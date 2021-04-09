@@ -1,8 +1,8 @@
 package commandes.partie;
 
 import exceptions.PartieInconnue;
-import jeu.Joueur;
-import jeu.Partie;
+import partie.Joueur;
+import partie.Partie;
 
 public class AfficherPiecesCommande extends CommandePartie {
 
@@ -17,7 +17,7 @@ public class AfficherPiecesCommande extends CommandePartie {
         try {
             partie = joueur.getLastPartie();
         } catch (PartieInconnue partieInconnue) {
-            partieInconnue.printStackTrace();
+            super.erreur("Echec du chargement en interne de la partie.");
             return;
         }
         System.out.println("Listes de toutes les pièces disponibles à leur indice respectif:");

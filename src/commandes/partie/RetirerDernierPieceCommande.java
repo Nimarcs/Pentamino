@@ -2,8 +2,8 @@ package commandes.partie;
 
 import exceptions.AucunePiecePlace;
 import exceptions.PartieInconnue;
-import jeu.Joueur;
-import jeu.Partie;
+import partie.Joueur;
+import partie.Partie;
 
 public class RetirerDernierPieceCommande extends CommandePartie {
 
@@ -22,6 +22,7 @@ public class RetirerDernierPieceCommande extends CommandePartie {
             Partie partie = joueur.getLastPartie();
             partie.retirerDernierePiece();
             partie.afficherGrille();
+            super.info("Dernière pièce joué retiré et remise dans les pèces à placer.");
         } catch (PartieInconnue partieInconnue) {
             super.erreur("Echec en interne du chargement de la partie.");
         } catch (AucunePiecePlace aucunePiecePlace) {
