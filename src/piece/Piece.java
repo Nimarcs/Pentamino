@@ -69,6 +69,11 @@ public class Piece {
 
     //getter et setter
 
+    public void setCoordonnees(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
     /**
      * getteur de Y
      * @return abscisse du coin superieur gauche de la piece
