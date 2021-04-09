@@ -130,7 +130,10 @@ public class Jeu {
         if(commandeStr == null) return;
         String[] commandeDonnee = commandeStr.split(" ");
         int indice = CommandeUtil.trouverIndiceCommande(this.commandesJeu, commandeDonnee[0]);
-        if (indice == -1) return;
+        if (indice == -1) {
+            System.out.println("[ERREUR]: Commande '" + commandeDonnee[0] + "' non reconnue.");
+            return;
+        }
         this.commandesJeu.get(indice).executer(commandeDonnee, this);
     }
 
@@ -142,7 +145,10 @@ public class Jeu {
         if(commandeStr == null) return;
         String[] commandeDonnee = commandeStr.split(" ");
         int indice = CommandeUtil.trouverIndiceCommande(this.commandesPartie, commandeDonnee[0]);
-        if (indice == -1) return;
+        if (indice == -1) {
+            System.out.println("[ERREUR]: Commande '" + commandeDonnee[0] + "' non reconnue.");
+            return;
+        }
         this.commandesPartie.get(indice).executer(commandeDonnee, joueur);
     }
 
