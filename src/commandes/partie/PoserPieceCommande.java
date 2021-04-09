@@ -4,9 +4,7 @@ import exceptions.CoordonneeInvalide;
 import exceptions.NumeroInconnue;
 import exceptions.PartieInconnue;
 import exceptions.PlacementInterdit;
-import jeu.Joueur;
-
-import java.util.Arrays;
+import partie.Joueur;
 
 public class PoserPieceCommande extends CommandePartie {
 
@@ -19,6 +17,7 @@ public class PoserPieceCommande extends CommandePartie {
             super.erreur("Pas assez d'arguments.");
             return;
         }
+        //On s'assure que les arguments sont bien des entiers.
         int numPiece = -1, posX = -1, posY = -1;
         try {
             numPiece = Integer.parseInt(args[1]);

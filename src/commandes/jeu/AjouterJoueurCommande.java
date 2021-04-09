@@ -3,7 +3,11 @@ package commandes.jeu;
 import exceptions.CharInvalide;
 import exceptions.CoordonneeInvalide;
 import exceptions.ValeurNonTraite;
-import jeu.*;
+import jeu.Jeu;
+import partie.Joueur;
+import partie.JoueurAvance;
+import partie.JoueurDebutant;
+import partie.JoueurIntermediaire;
 
 import java.io.IOException;
 
@@ -26,6 +30,7 @@ public class AjouterJoueurCommande extends CommandeJeu {
         }
         String prenom = args[1];
         int x = 0, y = 0;
+        //On s'assure que les arguments sont bien des entiers
         try {
             x = Integer.parseInt(args[3]);
             y = Integer.parseInt(args[4]);

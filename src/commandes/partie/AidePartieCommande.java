@@ -1,7 +1,7 @@
 package commandes.partie;
 
 import commandes.Commande;
-import jeu.Joueur;
+import partie.Joueur;
 
 import java.util.List;
 
@@ -19,9 +19,7 @@ public class AidePartieCommande extends CommandePartie {
 
     public void executer(String[] args, Joueur joueur) {
         System.out.println("Liste de toutes les commandes:");
-        for (Commande commande : this.commandes) {
-            commande.afficherAide();
-        }
+        this.commandes.forEach(System.out::println);
         System.out.println();
 
     }

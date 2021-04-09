@@ -1,9 +1,10 @@
 package jeu;
 
-import commandes.*;
+import commandes.CommandeUtil;
 import commandes.jeu.*;
 import commandes.partie.*;
 import exceptions.*;
+import partie.Joueur;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,6 +22,11 @@ public class Jeu {
 
     private int indiceJoueurCourant;
 
+    /**
+     * Méthode permettant de sélectionner le joueur avec lequel on veut jouer à partir d'un indice qui doit exister
+     * @param indice indice du joueur sélectionné
+     * @return true si indice existe, sinon false
+     */
     public boolean setJoueurCourant(int indice) {
         if(indice >= this.joueurs.size()) return false;
         this.indiceJoueurCourant = indice;
@@ -46,7 +52,7 @@ public class Jeu {
     //constructeur
 
     /**
-     * constructeur vide de Jeu
+     * constructeur vide de jeu.Jeu
      */
     public Jeu() {
         this.indiceJoueurCourant = -1;
@@ -91,7 +97,6 @@ public class Jeu {
      * @throws ValeurNonTraite renvoye par Partie lors d'une erreur lorsqu'un caratere non traite est trouve dans un fichier
      */
     public void lancerJeu() throws CharInvalide, CoordonneeInvalide, IOException, ValeurNonTraite {
-
         //creer un scanner
         Scanner scanner = new Scanner(System.in);
 
@@ -105,8 +110,10 @@ public class Jeu {
             this.executerCommandeJeu(commande);
         }
 
+        //on récupère le joueur choisis
         Joueur joueur = this.joueurs.get(this.indiceJoueurCourant);
         System.out.println("Lancement d'une partie avec le joueur " + joueur);
+
         //boucle jusqu'a la fin des tours
         while (!this.estFinis) {
             System.out.println("Entrez une commande (taper \"aide\" pour une liste de commandes)");
@@ -122,9 +129,9 @@ public class Jeu {
     private void executerCommandeJeu(String commandeStr) {
         if(commandeStr == null) return;
         String[] commandeDonnee = commandeStr.split(" ");
-        for (CommandeJeu commande : this.commandesJeu) {
-            if (commande.getAlias().equalsIgnoreCase(commandeDonnee[0])) commande.executer(commandeDonnee, this);
-        }
+        int indice = CommandeUtil.trouverIndiceCommande(this.commandesJeu, commandeDonnee[0]);
+        if (indice == -1) return;
+        this.commandesJeu.get(indice).executer(commandeDonnee, this);
     }
 
     /**
@@ -134,9 +141,9 @@ public class Jeu {
     private void executerCommandeJoueur(String commandeStr, Joueur joueur) {
         if(commandeStr == null) return;
         String[] commandeDonnee = commandeStr.split(" ");
-        for (CommandePartie commande : this.commandesPartie) {
-            if (commande.getAlias().equalsIgnoreCase(commandeDonnee[0])) commande.executer(commandeDonnee, joueur);
-        }
+        int indice = CommandeUtil.trouverIndiceCommande(this.commandesPartie, commandeDonnee[0]);
+        if (indice == -1) return;
+        this.commandesPartie.get(indice).executer(commandeDonnee, joueur);
     }
 
     //main
@@ -146,6 +153,7 @@ public class Jeu {
         Jeu jeu = new Jeu();
         try {
             jeu.lancerJeu();
+            //Exceptions se déclenchant si le programme n'arrive pas à bien charger les formes.
         } catch (IOException | CharInvalide | ValeurNonTraite | CoordonneeInvalide e) {
             e.printStackTrace();
         }

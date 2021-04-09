@@ -1,6 +1,5 @@
-package jeu;
+package partie;
 
-import commandes.jeu.CommandeJeu;
 import exceptions.*;
 
 import java.io.IOException;
@@ -42,14 +41,11 @@ public abstract class Joueur implements Comparable<Joueur> {
         return this.parties;
     }
 
-    public Partie getPartie(int index) throws PartieInconnue {
-        if (index < this.parties.size() && index > 0){
-            return this.parties.get(index);
-        } else{
-            throw new PartieInconnue(index);
-        }
-    }
-
+    /**
+     * Méthode retournant la partie actuelle d'un joueur
+     * @return partie actuelle d'un joueur
+     * @throws PartieInconnue cas ou il n'a aucune partie
+     */
     public Partie getLastPartie() throws PartieInconnue {
         if (this.parties.size() == 0)
             throw new PartieInconnue(-1);
@@ -60,8 +56,27 @@ public abstract class Joueur implements Comparable<Joueur> {
 
     public abstract void calculerScore();
 
+    /**
+     * Méthode pour ajouter une pièce dans sa dernière partie (partie en cours)
+     * @param num numéro de pièce
+     * @param x posX
+     * @param y posY
+     * @throws CoordonneeInvalide x ou y < 0 ou > taille du tableau
+     * @throws NumeroInconnue num n'est pas un indice valide
+     * @throws PartieInconnue le joueur n'a aucune partie
+     * @throws PlacementInterdit le placement désiré est interdis par le mode de jeu
+     */
     public abstract void ajouterPiece(int num, int x, int y) throws CoordonneeInvalide, NumeroInconnue, PartieInconnue, PlacementInterdit;
 
+    /**
+     * Méthode permettant de créer une partie avec une grille de x par y
+     * @param x tailleX
+     * @param y tailleY
+     * @throws CharInvalide erreur interne lors du chargement des pièces
+     * @throws CoordonneeInvalide x ou y < 0
+     * @throws IOException erreur interne lors du chargement des pièces
+     * @throws ValeurNonTraite erreur interne lors du chargement des pièces
+     */
     public void creerPartie(int x , int y) throws CharInvalide, CoordonneeInvalide, IOException, ValeurNonTraite {
         Partie partie = new Partie(x, y);
         this.parties.add(partie);

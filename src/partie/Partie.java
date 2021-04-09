@@ -1,6 +1,7 @@
-package jeu;
+package partie;
 
 import exceptions.*;
+import piece.Carre;
 import piece.*;
 
 import java.io.IOException;
@@ -115,7 +116,6 @@ public class Partie {
      * @throws NumeroInconnue renvoyé si n est invalide
      * @throws CoordonneeInvalide renvoyé si l'on essaye de poser la piece hors du terrain
      * @throws CaseDejaOccupe renvoyé si la case est deja occupé par une autre piece
-     * @throws PieceEmpietePiece renvoyé si une partie de la piece superpose une piece deja pose
      * @throws PieceDebordeTerrain renvoyé si une partie de la piece déborde de la grille
      */
     public void testerPosePiece(int n, int x, int y) throws NumeroInconnue, CoordonneeInvalide, CaseDejaOccupe, PieceDebordeTerrain {
@@ -164,6 +164,10 @@ public class Partie {
         this.piecePosees.add(piece);
     }
 
+    /**
+     * Méthode forcant la pose d'une pièce
+     * @param piece pièce
+     */
     private void poserPieceSurGrille(Piece piece) {
         int x = piece.getX();
         int y = piece.getY();
@@ -177,6 +181,10 @@ public class Partie {
         }
     }
 
+    /**
+     * Méthode permettant de retirer la dernière pièce joué
+     * @throws AucunePiecePlace s'il n'y a pas de pièce joué
+     */
     public void retirerDernierePiece() throws AucunePiecePlace {
         if(this.piecePosees.size() == 0) throw new AucunePiecePlace();
         Piece toRemove = this.piecePosees.get(this.piecePosees.size()-1);
@@ -185,6 +193,9 @@ public class Partie {
         this.actualiserGrille();
     }
 
+    /**
+     * Méthode actualisant la grille en la récréant entièrement et en ajoutant les pièces posés
+     */
     private void actualiserGrille() {
         this.remplirGrille('.');
         this.piecePosees.forEach(this::poserPieceSurGrille);

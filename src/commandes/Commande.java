@@ -1,7 +1,5 @@
 package commandes;
 
-import jeu.Joueur;
-
 public abstract class Commande {
 
     private String alias;
@@ -10,6 +8,9 @@ public abstract class Commande {
         this.alias = alias;
     }
 
+    /**
+     * Méthode affichant l'aide sur une commande, comment l'utiliser.
+     */
     public abstract void afficherAide();
 
     @Override
@@ -22,8 +23,16 @@ public abstract class Commande {
         return alias != null ? alias.equals(commande.alias) : commande.alias == null;
     }
 
+    /**
+     * getter sur alias
+     * @return alias de la commande
+     */
     public String getAlias() { return this.alias; }
 
+    /**
+     * Méthode ayant pour but de communiquer une erreur à l'utilisateur
+     * @param message message a envoyé à l'utilisateur
+     */
     public void erreur(String message) {
         System.out.println("[ERREUR]: " + message);
         this.afficherAide();
@@ -34,6 +43,10 @@ public abstract class Commande {
         return alias != null ? alias.hashCode() : 0;
     }
 
+    /**
+     * Méthode ayant pour but de communiquer une information à l'utilisateur, comme une bonne exécution de la commande par exemple
+     * @param info
+     */
     protected void info(String info) {
         System.out.println("[INFO]: " + info);
     }
