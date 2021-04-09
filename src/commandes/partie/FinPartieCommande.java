@@ -1,7 +1,7 @@
 package commandes.partie;
 
 import jeu.Jeu;
-import jeu.Joueur;
+import partie.Joueur;
 
 public class FinPartieCommande extends CommandePartie {
 
