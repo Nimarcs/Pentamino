@@ -1,8 +1,7 @@
 package jeu;
 
 import exceptions.*;
-import piece.Piece;
-import piece.U;
+import piece.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -87,6 +86,10 @@ public class Partie {
         //TODO
         this.pieceAPoser = new ArrayList<Piece>();
         this.pieceAPoser.add(new U(0, 0));
+        this.pieceAPoser.add(new T(0, 0));
+        this.pieceAPoser.add(new V(0, 0));
+        this.pieceAPoser.add(new U(0, 0));
+        this.pieceAPoser.add(new L(0, 0));
     }
 
     /**
@@ -140,7 +143,7 @@ public class Partie {
     }
 
     public void testerPieceAPoserExiste(int n) throws NumeroInconnue {
-        if(this.pieceAPoser.size() < n) throw new NumeroInconnue(n);
+        if(this.pieceAPoser.size() <= n) throw new NumeroInconnue(n);
     }
 
     /**
@@ -149,15 +152,22 @@ public class Partie {
      * @param x position sur l'ordonnee
      * @param y position sur l'abscisse
      */
-    public void ajouterPiece(int n, int x, int y) throws NumeroInconnue, CoordonneeInvalide {
+    public void forcerPosePiece(int n, int x, int y) throws NumeroInconnue, CoordonneeInvalide {
         this.testerPieceAPoserExiste(n);
         this.testCoordonnee(x, y);
         this.score++;
         //recuperation des valeurs
         Piece piece = this.pieceAPoser.get(n);
-        char character = piece.getLettre();
+        piece.setCoordonnees(x, y);
+        this.poserPieceSurGrille(piece);
+        this.pieceAPoser.remove(n);
+        this.piecePosees.add(piece);
+    }
 
-        //On commence à placer la pièce
+    private void poserPieceSurGrille(Piece piece) {
+        int x = piece.getX();
+        int y = piece.getY();
+        char character = piece.getLettre();
         List<Carre> carresPiece = piece.getCarres();
         for(Carre carre : carresPiece) {
             int newX = x + carre.getX();
@@ -167,20 +177,25 @@ public class Partie {
         }
     }
 
+    public void retirerDernierePiece() throws AucunePiecePlace {
+        if(this.piecePosees.size() == 0) throw new AucunePiecePlace();
+        Piece toRemove = this.piecePosees.get(this.piecePosees.size()-1);
+        this.piecePosees.remove(toRemove);
+        this.pieceAPoser.add(toRemove);
+        this.actualiserGrille();
+    }
+
+    private void actualiserGrille() {
+        this.remplirGrille('.');
+        this.piecePosees.forEach(this::poserPieceSurGrille);
+    }
+
     /**
      * Getter pour piecesAPoser
      * @return liste des piéces à poser
      */
     public List<Piece> getPieceAPoser() {
         return pieceAPoser;
-    }
-
-    /**
-     * getter de grille
-     * @return grille de jeu
-     */
-    public char[][] getGrille() {
-        return grille;
     }
 
     /**
