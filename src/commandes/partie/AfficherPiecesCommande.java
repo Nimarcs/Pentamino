@@ -8,7 +8,7 @@ public class AfficherPiecesCommande extends CommandePartie {
 
 
     public AfficherPiecesCommande() {
-        super("afficher_piece");
+        super("afficher_pieces");
     }
 
     @Override
@@ -28,6 +28,6 @@ public class AfficherPiecesCommande extends CommandePartie {
 
     @Override
     public void afficherAide() {
-        System.out.println(" -afficher_piece: Affiche les pièces restantes à poser sur la grille.");
+        System.out.println(" -afficher_pieces: Affiche les pièces restantes à poser sur la grille.");
     }
 }
