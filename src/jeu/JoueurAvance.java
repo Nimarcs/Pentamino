@@ -28,7 +28,7 @@ public class JoueurAvance extends Joueur{
         Partie partie = this.getLastPartie();
         try {
             partie.testerPosePiece(num, x, y);
-            partie.ajouterPiece(num, x, y);
+            partie.forcerPosePiece(num, x, y);
         } catch (PieceDebordeTerrain caseDejaOccupe) {
             throw new PlacementInterdit("Vous ne pouvez pas avoir des pièces débordant du terrain.");
         } catch (CaseDejaOccupe caseDejaOccupe) {

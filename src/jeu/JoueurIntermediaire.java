@@ -28,9 +28,9 @@ public class JoueurIntermediaire extends Joueur {
         Partie partie = this.getLastPartie();
         try {
             partie.testerPosePiece(num, x, y);
-            partie.ajouterPiece(num, x, y);
+            partie.forcerPosePiece(num, x, y);
         } catch (PieceDebordeTerrain caseDejaOccupe) {
-            partie.ajouterPiece(num, x, y);
+            partie.forcerPosePiece(num, x, y);
         } catch (CaseDejaOccupe caseDejaOccupe) {
             throw new PlacementInterdit("Vous ne pouvez pas superposer les pièces.");
         }

@@ -29,9 +29,9 @@ public class JoueurDebutant extends Joueur {
         Partie partie = this.getLastPartie();
         try {
             partie.testerPosePiece(num, x, y);
-            partie.ajouterPiece(num, x, y);
+            partie.forcerPosePiece(num, x, y);
         } catch (CaseDejaOccupe | PieceDebordeTerrain caseDejaOccupe) {
-            partie.ajouterPiece(num, x, y);
+            partie.forcerPosePiece(num, x, y);
         }
     }
 
