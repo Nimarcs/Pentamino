@@ -112,7 +112,7 @@ public class Jeu {
 
         //on récupère le joueur choisis
         Joueur joueur = this.joueurs.get(this.indiceJoueurCourant);
-        System.out.println("Lancement d'une partie avec le joueur " + joueur);
+        System.out.println("Lancement d'une partie avec le joueur " + joueur.getPrenom());
 
         //boucle jusqu'a la fin des tours
         while (!this.estFinis) {
