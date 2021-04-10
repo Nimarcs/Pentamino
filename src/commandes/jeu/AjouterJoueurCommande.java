@@ -28,6 +28,11 @@ public class AjouterJoueurCommande extends CommandeJeu {
             super.erreur("Pas assez d'arguments");
             return;
         }
+        //verification que le nom n'est pas trop long
+        if(args[1].length() > 10) {
+            super.erreur("Nom fourni trop long");
+            return;
+        }
         String prenom = args[1];
         int x = 0, y = 0;
         //On s'assure que les arguments sont bien des entiers
