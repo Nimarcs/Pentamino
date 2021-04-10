@@ -181,7 +181,7 @@ public class Jeu implements Serializable {
     //main
 
     public static void main(String[] args) {
-        Jeu jeu = null;
+        Jeu jeu = new Jeu();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Voulez-vous charger un jeu ? (Y/N)");
         String reponse = scanner.nextLine().toUpperCase();
@@ -198,7 +198,6 @@ public class Jeu implements Serializable {
                 jeu = (Jeu) objectInputStream.readObject();
             } catch (IOException | ClassNotFoundException e) {
                 System.out.println("Erreur lors du chargement du fichier, lancement d'un nouveau jeu");
-                jeu = new Jeu();
             }
         }
         //on creer puis lance un jeu
