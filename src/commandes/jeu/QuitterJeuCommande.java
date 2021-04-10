@@ -1,9 +1,7 @@
 package commandes.jeu;
 
-import commandes.Commande;
 import jeu.Jeu;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class QuitterJeuCommande extends CommandeJeu {
@@ -21,7 +19,7 @@ public class QuitterJeuCommande extends CommandeJeu {
     public void executer(String[] args, Jeu jeu) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Voulez-vous vraiment quitter ? (Y/N)");
+        super.info("Voulez-vous vraiment quitter ? (Y/N) (Attention, ça ne sauvegarde pas automatiquement)");
         String reponse = scanner.nextLine().toUpperCase();
 
         //tant que ce n'est ni Y ni N

@@ -3,6 +3,10 @@ package commandes.jeu;
 
 import jeu.Jeu;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
 public class SauvegarderJeuCommande extends CommandeJeu {
 
 
@@ -29,10 +33,15 @@ public class SauvegarderJeuCommande extends CommandeJeu {
             return;
         }
 
-        //TODO sauvegarde
         //faire les try catch pour les erreurs
-
-        System.out.println("sauvegarde effectue dans le fichier :" + args[1]);
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(args[1]));
+            oos.writeObject(jeu);
+            oos.close();
+            super.info("sauvegarde effectue dans le fichier: " + args[1]);
+        } catch (IOException e) {
+            super.erreur("Echec lors de la sauvegarde du jeu.");
+        }
 
     }
 
