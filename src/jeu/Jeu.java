@@ -20,6 +20,9 @@ public class Jeu {
      */
     private List<Joueur> joueurs;
 
+    /**
+     * indice du joueur courant
+     */
     private int indiceJoueurCourant;
 
     /**
@@ -35,6 +38,11 @@ public class Jeu {
 
     /**
      * signale la fin d'une partie
+     */
+    private boolean partieEstFinis;
+
+    /**
+     * signale la fin du jeu
      */
     private boolean estFinis;
 
@@ -56,6 +64,7 @@ public class Jeu {
      */
     public Jeu() {
         this.indiceJoueurCourant = -1;
+        this.partieEstFinis = false;
         this.estFinis = false;
         this.joueurs = new ArrayList<Joueur>();
         this.commandesPartie = new ArrayList<CommandePartie>();
@@ -68,8 +77,16 @@ public class Jeu {
     /**
      * methode permettant d'arreter le jeu
      */
-    public void finirJeu() {
+    public void finirJeu(){
         this.estFinis = true;
+        System.exit(0);
+    }
+
+    /**
+     * methode permettant d'arreter la partie
+     */
+    public void finirPartie() {
+        this.partieEstFinis = true;
     }
 
     /**
@@ -86,6 +103,7 @@ public class Jeu {
         this.commandesJeu.add(new ChoisirJoueurCommande());
         this.commandesJeu.add(new AfficherJoueurCommande());
         this.commandesJeu.add(new AjouterJoueurCommande());
+        this.commandesJeu.add(new QuitterJeuCommande());
         this.commandesJeu.add(new AideJeuCommande(this.commandesJeu));
     }
 
@@ -103,22 +121,25 @@ public class Jeu {
         //initialisation des valeurs necessaire
         this.enregistrerCommandes();
 
-        //on prépare le jeu avec l'ajout/sélection des joueurs
-        while(this.indiceJoueurCourant == -1) {
-            System.out.println("Entrez une commande (taper \"aide\" pour une liste de commandes)");
-            String commande = scanner.nextLine();
-            this.executerCommandeJeu(commande);
-        }
+        while(!this.estFinis) { //tourne tant que le jeu est en route
 
-        //on récupère le joueur choisis
-        Joueur joueur = this.joueurs.get(this.indiceJoueurCourant);
-        System.out.println("Lancement d'une partie avec le joueur " + joueur.getPrenom());
+            //on prépare le jeu avec l'ajout/sélection des joueurs
+            while (this.indiceJoueurCourant == -1) {
+                System.out.println("Entrez une commande (taper \"aide\" pour une liste de commandes)");
+                String commande = scanner.nextLine();
+                this.executerCommandeJeu(commande);
+            }
 
-        //boucle jusqu'a la fin des tours
-        while (!this.estFinis) {
-            System.out.println("Entrez une commande (taper \"aide\" pour une liste de commandes)");
-            String commande = scanner.nextLine();
-            this.executerCommandeJoueur(commande, joueur);
+            //on récupère le joueur choisis
+            Joueur joueur = this.joueurs.get(this.indiceJoueurCourant);
+            System.out.println("Lancement d'une partie avec le joueur " + joueur.getPrenom());
+
+            //boucle jusqu'a la fin des tours
+            while (!this.partieEstFinis) {
+                System.out.println("Entrez une commande (taper \"aide\" pour une liste de commandes)");
+                String commande = scanner.nextLine();
+                this.executerCommandeJoueur(commande, joueur);
+            }
         }
     }
 
