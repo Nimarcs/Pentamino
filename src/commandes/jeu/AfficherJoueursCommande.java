@@ -10,7 +10,7 @@ import java.util.List;
 public class AfficherJoueursCommande extends CommandeJeu {
 
     public AfficherJoueursCommande() {
-        super("afficher_joueur");
+        super("afficher_joueurs");
     }
 
     @Override
