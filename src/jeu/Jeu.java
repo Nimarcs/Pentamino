@@ -104,6 +104,7 @@ public class Jeu {
         this.commandesJeu.add(new AfficherJoueurCommande());
         this.commandesJeu.add(new AjouterJoueurCommande());
         this.commandesJeu.add(new QuitterJeuCommande());
+        this.commandesJeu.add(new SauvegarderJeuCommande());
         this.commandesJeu.add(new AideJeuCommande(this.commandesJeu));
     }
 

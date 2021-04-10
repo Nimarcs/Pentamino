@@ -14,13 +14,12 @@ public class FinPartieCommande extends CommandePartie {
 
     @Override
     public void executer(String[] args, Joueur joueur) {
-        //TODO: save in file
         this.jeu.finirPartie();
-        System.out.println("Jeu finis.");
+        System.out.println("Partie finis.");
     }
 
     @Override
     public void afficherAide() {
-        System.out.println(" -fin [fichier_sauvegarde]: Met fin à la partie et sauvegarde dans un fichier si précisé.");
+        System.out.println(" -fin : Met fin à la partie.");
     }
 }
