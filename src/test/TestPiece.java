@@ -2,12 +2,13 @@ package test;
 
 import exceptions.CoordonneeInvalide;
 import piece.Carre;
-import org.junit.Assert;
 import org.junit.Test;
 import piece.L;
 import piece.U;
 
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 public class TestPiece {
 
@@ -15,8 +16,8 @@ public class TestPiece {
     public void test01_carre_normal() throws Exception {
 
         Carre c = new Carre(7, 6);
-        Assert.assertEquals("carre au mauvais endroit", 7, c.getX());
-        Assert.assertEquals("carre au mauvais endroit", 6, c.getY());
+        assertEquals("carre au mauvais endroit", 7, c.getX());
+        assertEquals("carre au mauvais endroit", 6, c.getY());
 
     }
 
@@ -33,16 +34,16 @@ public class TestPiece {
     public void test03_piece_normalU() throws Exception {
 
         U piece = new U(0, 0);
-        Assert.assertEquals("La lettre est cense etre U ", 'U', piece.getLettre());
-        Assert.assertEquals("mauvaise abscisse de la piece", 0, piece.getY());
-        Assert.assertEquals("mauvaise ordonne de la piece", 0, piece.getX());
+        assertEquals("La lettre est cense etre U ", 'U', piece.getLettre());
+        assertEquals("mauvaise abscisse de la piece", 0, piece.getY());
+        assertEquals("mauvaise ordonne de la piece", 0, piece.getX());
         List<Carre> carres = piece.getCarres();
         Carre c1 = carres.get(0);
         Carre c5 = carres.get(4);
-        Assert.assertEquals("carre au mauvais endroit", 0, c1.getX());
-        Assert.assertEquals("carre au mauvais endroit", 0, c1.getY());
-        Assert.assertEquals("carre au mauvais endroit", 1, c5.getX());
-        Assert.assertEquals("carre au mauvais endroit", 2, c5.getY());
+        assertEquals("carre au mauvais endroit", 0, c1.getX());
+        assertEquals("carre au mauvais endroit", 0, c1.getY());
+        assertEquals("carre au mauvais endroit", 1, c5.getX());
+        assertEquals("carre au mauvais endroit", 2, c5.getY());
 
     }
 
@@ -50,22 +51,22 @@ public class TestPiece {
     public void test04_piece_normalL() throws Exception {
 
         L piece = new L(0, 0);
-        Assert.assertEquals("La lettre est cense etre L ", 'L', piece.getLettre());
-        Assert.assertEquals("mauvaise abscisse de la piece", 0, piece.getY());
-        Assert.assertEquals("mauvaise ordonne de la piece", 0, piece.getX());
+        assertEquals("La lettre est cense etre L ", 'L', piece.getLettre());
+        assertEquals("mauvaise abscisse de la piece", 0, piece.getY());
+        assertEquals("mauvaise ordonne de la piece", 0, piece.getX());
         List<Carre> carres = piece.getCarres();
         Carre c1 = carres.get(0);
         Carre c2 = carres.get(1);
         Carre c3 = carres.get(2);
         Carre c4 = carres.get(3);
-        Assert.assertEquals("carre au mauvais endroit", 0, c1.getX());
-        Assert.assertEquals("carre au mauvais endroit", 0, c1.getY());
-        Assert.assertEquals("carre au mauvais endroit", 1, c2.getX());
-        Assert.assertEquals("carre au mauvais endroit", 0, c2.getY());
-        Assert.assertEquals("carre au mauvais endroit", 2, c3.getX());
-        Assert.assertEquals("carre au mauvais endroit", 0, c3.getY());
-        Assert.assertEquals("carre au mauvais endroit", 2, c4.getX());
-        Assert.assertEquals("carre au mauvais endroit", 1, c4.getY());
+        assertEquals("carre au mauvais endroit", 0, c1.getX());
+        assertEquals("carre au mauvais endroit", 0, c1.getY());
+        assertEquals("carre au mauvais endroit", 1, c2.getX());
+        assertEquals("carre au mauvais endroit", 0, c2.getY());
+        assertEquals("carre au mauvais endroit", 2, c3.getX());
+        assertEquals("carre au mauvais endroit", 0, c3.getY());
+        assertEquals("carre au mauvais endroit", 2, c4.getX());
+        assertEquals("carre au mauvais endroit", 1, c4.getY());
 
     }
 
@@ -77,7 +78,7 @@ public class TestPiece {
         //methode testee
         String res = piece.toString();
         // verification
-        Assert.assertEquals("Le string est censé être #_#\\n### ", "#_#\n###", res);
+        assertEquals("Le string est censé être #_#\\n### ", "#_#\n###", res);
 
 
     }
@@ -90,7 +91,7 @@ public class TestPiece {
         //methode testee
         String res = piece.toString();
         // verification
-        Assert.assertEquals("Le string est censé être #_\\n#_\\n## ", "#_\n#_\n##", res);
+        assertEquals("Le string est censé être #_\\n#_\\n## ", "#_\n#_\n##", res);
 
 
     }
