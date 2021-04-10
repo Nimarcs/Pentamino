@@ -19,7 +19,7 @@ public class AidePartieCommande extends CommandePartie {
 
     public void executer(String[] args, Joueur joueur) {
         System.out.println("Liste de toutes les commandes:");
-        this.commandes.forEach(System.out::println);
+        this.commandes.forEach(Commande::afficherAide);
         System.out.println();
 
     }
