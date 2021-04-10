@@ -45,4 +45,18 @@ public class TestPiece {
 
     }
 
+    @Test
+    public void test04_toString_normal() throws Exception {
+
+        // preparation des donnees
+        U piece = new U(0, 0);
+        //methode testee
+        String res = piece.toString();
+        // verification
+        System.out.println(res);
+        Assert.assertEquals("Le string est censé être #_#\\n### ", "#_#\n###", res);
+
+
+    }
+
 }

@@ -171,7 +171,40 @@ public class Piece {
 
     @Override
     public String toString() {
-        return String.valueOf(this.getLettre());
+        //initalisation
+        String res = "";
+        int maxX = this.carres.get(0).getX(), maxY =  this.carres.get(0).getY(); //determine la taille de la piece
+        //on recupere la taille de la piece
+        for(int i = 1; i < this.carres.size(); i++){
+            if (maxX < this.carres.get(i).getX())
+                maxX = this.carres.get(i).getX();
+            if (maxY < this.carres.get(i).getY())
+                maxY = this.carres.get(i).getY();
+        }
+        //on initalise le string de la piece
+        for (int i = 0; i<= maxX;  i++){
+            for (int j = 0; j <= maxY; j++){
+                res += "_";
+            }
+            res += "\n";
+        }
+        //on transforme res en tableau de char pour travailler dessus
+        char [] tab =  res.toCharArray();
+        //on place les #
+        for (int i = 0; i < this.carres.size(); i++){
+            int pos = this.carres.get(i).getY();
+            if (this.carres.get(i).getX() > 0)
+                pos += maxY * this.carres.get(i).getX()+2;
+
+            //int pos = this.carres.get(i).getX() * maxY + (this.carres.get(i).getX() +1) * (this.carres.get(i).getY()) ;
+            System.out.println(pos);
+            tab[pos] = '#';
+        }
+        //on retransforme en String
+        res = new String(tab);
+        //on retire le retour a la ligne en trop
+        res = res.substring(0, res.length()-1);
+        return res;
     }
 
     @Override
