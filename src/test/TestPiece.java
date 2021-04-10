@@ -4,6 +4,7 @@ import exceptions.CoordonneeInvalide;
 import piece.Carre;
 import org.junit.Assert;
 import org.junit.Test;
+import piece.L;
 import piece.U;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class TestPiece {
     }
 
     @Test
-    public void test03_piece_normal() throws Exception {
+    public void test03_piece_normalU() throws Exception {
 
         U piece = new U(0, 0);
         Assert.assertEquals("La lettre est cense etre U ", 'U', piece.getLettre());
@@ -46,15 +47,50 @@ public class TestPiece {
     }
 
     @Test
-    public void test04_toString_normal() throws Exception {
+    public void test04_piece_normalL() throws Exception {
+
+        L piece = new L(0, 0);
+        Assert.assertEquals("La lettre est cense etre L ", 'L', piece.getLettre());
+        Assert.assertEquals("mauvaise abscisse de la piece", 0, piece.getY());
+        Assert.assertEquals("mauvaise ordonne de la piece", 0, piece.getX());
+        List<Carre> carres = piece.getCarres();
+        Carre c1 = carres.get(0);
+        Carre c2 = carres.get(1);
+        Carre c3 = carres.get(2);
+        Carre c4 = carres.get(3);
+        Assert.assertEquals("carre au mauvais endroit", 0, c1.getX());
+        Assert.assertEquals("carre au mauvais endroit", 0, c1.getY());
+        Assert.assertEquals("carre au mauvais endroit", 1, c2.getX());
+        Assert.assertEquals("carre au mauvais endroit", 0, c2.getY());
+        Assert.assertEquals("carre au mauvais endroit", 2, c3.getX());
+        Assert.assertEquals("carre au mauvais endroit", 0, c3.getY());
+        Assert.assertEquals("carre au mauvais endroit", 2, c4.getX());
+        Assert.assertEquals("carre au mauvais endroit", 1, c4.getY());
+
+    }
+
+    @Test
+    public void test05_toString_normalU() throws Exception {
 
         // preparation des donnees
         U piece = new U(0, 0);
         //methode testee
         String res = piece.toString();
         // verification
-        System.out.println(res);
         Assert.assertEquals("Le string est censé être #_#\\n### ", "#_#\n###", res);
+
+
+    }
+
+    @Test
+    public void test06_toString_normalL() throws Exception {
+
+        // preparation des donnees
+        L piece = new L(0, 0);
+        //methode testee
+        String res = piece.toString();
+        // verification
+        Assert.assertEquals("Le string est censé être #_\\n#_\\n## ", "#_\n#_\n##", res);
 
 
     }

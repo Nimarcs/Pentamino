@@ -194,9 +194,8 @@ public class Piece {
         for (int i = 0; i < this.carres.size(); i++){
             int pos = this.carres.get(i).getY();
             if (this.carres.get(i).getX() > 0)
-                pos += maxY * this.carres.get(i).getX()+2;
+                pos += (maxY+2) * this.carres.get(i).getX();
 
-            //int pos = this.carres.get(i).getX() * maxY + (this.carres.get(i).getX() +1) * (this.carres.get(i).getY()) ;
             tab[pos] = '#';
         }
         //on retransforme en String
