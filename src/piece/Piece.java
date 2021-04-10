@@ -197,7 +197,6 @@ public class Piece {
                 pos += maxY * this.carres.get(i).getX()+2;
 
             //int pos = this.carres.get(i).getX() * maxY + (this.carres.get(i).getX() +1) * (this.carres.get(i).getY()) ;
-            System.out.println(pos);
             tab[pos] = '#';
         }
         //on retransforme en String
