@@ -85,13 +85,26 @@ public class Partie implements Serializable {
      * Méthode remplissant aléatoirement la liste des pièces à poser
      */
     private void remplirAleatoirementPieceAPoser() throws IOException, CharInvalide, CoordonneeInvalide, ValeurNonTraite {
-        //TODO
-        this.pieceAPoser = new ArrayList<Piece>();
-        this.pieceAPoser.add(new U(0, 0));
-        this.pieceAPoser.add(new T(0, 0));
-        this.pieceAPoser.add(new V(0, 0));
-        this.pieceAPoser.add(new U(0, 0));
-        this.pieceAPoser.add(new L(0, 0));
+        //nombre de piece que l'on vas choisir
+        final int nbPiece = 10;
+
+        //on definit une grande liste d'où l'on vas choisir aléatoirement
+        List<Piece> piecesPossible = new ArrayList<Piece>();
+        for (int i = 0; i < nbPiece; i++) {
+            piecesPossible.add(new U(0, 0));
+            piecesPossible.add(new T(0, 0));
+            piecesPossible.add(new V(0, 0));
+            piecesPossible.add(new L(0, 0));
+        }
+
+        this.pieceAPoser = new ArrayList<>();
+
+        //on remplit la liste avec des element aleatoire de piecesPossible
+        for(int i  =0; i< 10; i++) {
+            int rand =  (int) (Math.random() * ((piecesPossible.size()) + 1));
+            this.pieceAPoser.add(piecesPossible.get(rand));
+            piecesPossible.remove(rand);
+        }
     }
 
     /**
@@ -217,4 +230,6 @@ public class Partie implements Serializable {
     public int getScore() {
         return score;
     }
+
+
 }
