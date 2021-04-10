@@ -13,6 +13,8 @@ public abstract class Joueur implements Comparable<Joueur>, Serializable {
 
     private List<Partie> parties;
 
+    private Partie partieActuelle;
+
     private double score;
 
     private String prenom;
@@ -64,10 +66,9 @@ public abstract class Joueur implements Comparable<Joueur>, Serializable {
      * @param y posY
      * @throws CoordonneeInvalide x ou y < 0 ou > taille du tableau
      * @throws NumeroInconnue num n'est pas un indice valide
-     * @throws PartieInconnue le joueur n'a aucune partie
      * @throws PlacementInterdit le placement désiré est interdis par le mode de jeu
      */
-    public abstract void ajouterPiece(int num, int x, int y) throws CoordonneeInvalide, NumeroInconnue, PartieInconnue, PlacementInterdit;
+    public abstract void ajouterPiece(int num, int x, int y) throws CoordonneeInvalide, NumeroInconnue, PlacementInterdit, AucunePartie;
 
     /**
      * Méthode permettant de créer une partie avec une grille de x par y
@@ -81,6 +82,7 @@ public abstract class Joueur implements Comparable<Joueur>, Serializable {
     public void creerPartie(int x , int y) throws CharInvalide, CoordonneeInvalide, IOException, ValeurNonTraite {
         Partie partie = new Partie(x, y);
         this.parties.add(partie);
+        this.partieActuelle = partie;
     }
 
     public int compareTo(Joueur o) {
@@ -95,4 +97,13 @@ public abstract class Joueur implements Comparable<Joueur>, Serializable {
         return String.format("%10s (%06.2f)",this.prenom , this.score );
     }
 
+    public Partie getPartieActuelle() throws AucunePartie {
+        if(this.partieActuelle == null) throw new AucunePartie();
+        return partieActuelle;
+    }
+
+    public void setPartieActuelle(int indice) throws PartieInconnue {
+        if(indice >= this.parties.size()) throw new PartieInconnue(indice);
+        this.partieActuelle = this.parties.get(indice);
+    }
 }

@@ -1,7 +1,7 @@
 package commandes.partie;
 
+import exceptions.AucunePartie;
 import exceptions.AucunePiecePlace;
-import exceptions.PartieInconnue;
 import partie.Joueur;
 import partie.Partie;
 
@@ -19,14 +19,14 @@ public class RetirerDernierPieceCommande extends CommandePartie {
     @Override
     public void executer(String[] args, Joueur joueur) {
         try {
-            Partie partie = joueur.getLastPartie();
+            Partie partie = joueur.getPartieActuelle();
             partie.retirerDernierePiece();
             partie.afficherGrille();
             super.info("Dernière pièce joué retiré et remise dans les pèces à placer.");
-        } catch (PartieInconnue partieInconnue) {
-            super.erreur("Echec en interne du chargement de la partie.");
         } catch (AucunePiecePlace aucunePiecePlace) {
             super.erreur("Vous n'avez encore placé aucune pièce.");
+        } catch (AucunePartie aucunePartie) {
+            super.erreur("Vous n'avez pas encore choisis de partis");
         }
     }
 }

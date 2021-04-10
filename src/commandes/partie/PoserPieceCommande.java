@@ -1,9 +1,6 @@
 package commandes.partie;
 
-import exceptions.CoordonneeInvalide;
-import exceptions.NumeroInconnue;
-import exceptions.PartieInconnue;
-import exceptions.PlacementInterdit;
+import exceptions.*;
 import partie.Joueur;
 
 public class PoserPieceCommande extends CommandePartie {
@@ -28,15 +25,15 @@ public class PoserPieceCommande extends CommandePartie {
         }
         try {
             joueur.ajouterPiece(numPiece, posX, posY);
-            joueur.getLastPartie().afficherGrille();
+            joueur.getPartieActuelle().afficherGrille();
         } catch (CoordonneeInvalide coordonneeInvalide) {
             super.erreur("Les coordonnées doivent être positives et inférieur à la taille de la grille.");
         } catch (NumeroInconnue numeroInconnue) {
             super.erreur("Le numéro de pièce fournit (" + numPiece + ") n'a pas de pièce associé.");
-        } catch (PartieInconnue partieInconnue) {
-            super.erreur("Echec en interne du chargement de la partie.");
         } catch (PlacementInterdit placementInterdit) {
             super.erreur(placementInterdit.getMessage());
+        } catch (AucunePartie aucunePartie) {
+            super.erreur("Vous n'avez pas choisis de partie dans laquelle jouer.");
         }
     }
 

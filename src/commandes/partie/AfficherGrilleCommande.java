@@ -1,6 +1,6 @@
 package commandes.partie;
 
-import exceptions.PartieInconnue;
+import exceptions.AucunePartie;
 import partie.Joueur;
 
 public class AfficherGrilleCommande extends CommandePartie {
@@ -12,9 +12,9 @@ public class AfficherGrilleCommande extends CommandePartie {
     @Override
     public void executer(String[] args, Joueur joueur) {
         try {
-            joueur.getLastPartie().afficherGrille();
-        } catch (PartieInconnue partieInconnue) {
-            partieInconnue.printStackTrace();
+            joueur.getPartieActuelle().afficherGrille();
+        } catch (AucunePartie partieInconnue) {
+            super.erreur("Vous n'avez pas choisis de partie dans laquelle jouer.");
         }
     }
 

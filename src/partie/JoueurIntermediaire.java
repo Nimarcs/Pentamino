@@ -24,8 +24,8 @@ public class JoueurIntermediaire extends Joueur {
     }
 
     @Override
-    public void ajouterPiece(int num, int x, int y) throws CoordonneeInvalide, NumeroInconnue, PartieInconnue, PlacementInterdit {
-        Partie partie = this.getLastPartie();
+    public void ajouterPiece(int num, int x, int y) throws CoordonneeInvalide, NumeroInconnue, PlacementInterdit, AucunePartie {
+        Partie partie = this.getPartieActuelle();
         try {
             partie.testerPosePiece(num, x, y);
             partie.forcerPosePiece(num, x, y);

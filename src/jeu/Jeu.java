@@ -28,6 +28,11 @@ public class Jeu implements Serializable {
     private int indiceJoueurCourant;
 
     /**
+     * indice de la partie du joueur choisi, courante.
+     */
+    private int indicePartieCourante;
+
+    /**
      * Méthode permettant de sélectionner le joueur avec lequel on veut jouer à partir d'un indice qui doit exister
      * @param indice indice du joueur sélectionné
      * @return true si indice existe, sinon false
@@ -35,6 +40,17 @@ public class Jeu implements Serializable {
     public boolean setJoueurCourant(int indice) {
         if(indice >= this.joueurs.size()) return false;
         this.indiceJoueurCourant = indice;
+        return true;
+    }
+
+    /**
+     * Méthode permettant de sélectionner le partie du joueur joueur avec lequel on veut jouer
+     * @param indice indice de la partie dans les parties du joueur
+     * @return true si bien passé, sinon false
+     */
+    public boolean setPartieCourante(int indice) {
+        if(indice >= this.joueurs.get(this.indiceJoueurCourant).getParties().size()) return false;
+        this.indicePartieCourante = indice;
         return true;
     }
 
@@ -101,6 +117,9 @@ public class Jeu implements Serializable {
         this.commandesPartie.add(new AfficherPiecesCommande());
         this.commandesPartie.add(new AfficherGrilleCommande());
         this.commandesPartie.add(new RetirerDernierPieceCommande());
+        this.commandesPartie.add(new ChoisirPartieCommande());
+        this.commandesPartie.add(new AfficherPartiesCommande());
+        this.commandesPartie.add(new CreerPartieCommande());
 
         this.commandesJeu.add(new ChoisirJoueurCommande());
         this.commandesJeu.add(new AfficherJoueursCommande());

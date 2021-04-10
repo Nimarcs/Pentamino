@@ -1,6 +1,6 @@
 package commandes.partie;
 
-import exceptions.PartieInconnue;
+import exceptions.AucunePartie;
 import partie.Joueur;
 import partie.Partie;
 
@@ -15,9 +15,9 @@ public class AfficherPiecesCommande extends CommandePartie {
     public void executer(String[] args, Joueur joueur) {
         Partie partie;
         try {
-            partie = joueur.getLastPartie();
-        } catch (PartieInconnue partieInconnue) {
-            super.erreur("Echec du chargement en interne de la partie.");
+            partie = joueur.getPartieActuelle();
+        } catch (AucunePartie aucunePartie) {
+            super.erreur("Vous n'avez pas choisis de partie dans laquelle jouer.");
             return;
         }
         System.out.println("Listes de toutes les pièces disponibles à leur indice respectif:");
