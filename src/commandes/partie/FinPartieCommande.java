@@ -15,6 +15,7 @@ public class FinPartieCommande extends CommandePartie {
     @Override
     public void executer(String[] args, Joueur joueur) {
         this.jeu.finirPartie();
+        joueur.calculerScore();
         System.out.println("Partie finis.");
     }
 
