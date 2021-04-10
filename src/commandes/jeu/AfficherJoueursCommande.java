@@ -7,15 +7,15 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class AfficherJoueurCommande extends CommandeJeu {
+public class AfficherJoueursCommande extends CommandeJeu {
 
-    public AfficherJoueurCommande() {
+    public AfficherJoueursCommande() {
         super("afficher_joueur");
     }
 
     @Override
     public void afficherAide() {
-        System.out.println(" -afficher_joueur [nom|score]: Affiche tous les joueurs que l'on peut choisir avec leur indice");
+        System.out.println(" -afficher_joueurs [nom|score]: Affiche tous les joueurs que l'on peut choisir avec leur indice");
     }
 
     @Override
