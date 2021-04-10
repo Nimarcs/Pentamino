@@ -5,11 +5,12 @@ import piece.Carre;
 import piece.*;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Partie {
+public class Partie implements Serializable {
 
     /**
      * Représente le plateau de jeu

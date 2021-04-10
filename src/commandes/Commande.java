@@ -1,6 +1,8 @@
 package commandes;
 
-public abstract class Commande {
+import java.io.Serializable;
+
+public abstract class Commande implements Serializable {
 
     private String alias;
 

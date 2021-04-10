@@ -3,10 +3,11 @@ package partie;
 import exceptions.*;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Joueur implements Comparable<Joueur> {
+public abstract class Joueur implements Comparable<Joueur>, Serializable {
 
     //attributs
 

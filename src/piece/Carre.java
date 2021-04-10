@@ -3,7 +3,9 @@ package piece;
 
 import exceptions.CoordonneeInvalide;
 
-public class Carre {
+import java.io.Serializable;
+
+public class Carre implements Serializable {
 
     //attributs
 
