@@ -3,15 +3,17 @@ package jeu;
 import commandes.CommandeUtil;
 import commandes.jeu.*;
 import commandes.partie.*;
-import exceptions.*;
+import exceptions.CharInvalide;
+import exceptions.CoordonneeInvalide;
+import exceptions.ValeurNonTraite;
 import partie.Joueur;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Jeu {
+public class Jeu implements Serializable {
 
     //attributs
 
@@ -101,7 +103,7 @@ public class Jeu {
         this.commandesPartie.add(new RetirerDernierPieceCommande());
 
         this.commandesJeu.add(new ChoisirJoueurCommande());
-        this.commandesJeu.add(new AfficherJoueurCommande());
+        this.commandesJeu.add(new AfficherJoueursCommande());
         this.commandesJeu.add(new AjouterJoueurCommande());
         this.commandesJeu.add(new QuitterJeuCommande());
         this.commandesJeu.add(new SauvegarderJeuCommande());
@@ -177,8 +179,27 @@ public class Jeu {
     //main
 
     public static void main(String[] args) {
+        Jeu jeu = null;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Voulez-vous charger un jeu ? (Y/N)");
+        String reponse = scanner.nextLine().toUpperCase();
+        //tant que ce n'est ni Y ni N
+        while(!(reponse.equals("Y") || reponse.equals("N"))){
+            System.out.println("Réponse erronée notez Y pour charger et N pour continuer");
+            reponse = scanner.nextLine().toUpperCase();
+        }
+        if (reponse.equals("Y")){
+            System.out.println("Entrez le nom du fichier");
+            String file = scanner.nextLine();
+            try {
+                ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file));
+                jeu = (Jeu) objectInputStream.readObject();
+            } catch (IOException | ClassNotFoundException e) {
+                System.out.println("Erreur lors du chargement du fichier, lancement d'un nouveau jeu");
+                jeu = new Jeu();
+            }
+        }
         //on creer puis lance un jeu
-        Jeu jeu = new Jeu();
         try {
             jeu.lancerJeu();
             //Exceptions se déclenchant si le programme n'arrive pas à bien charger les formes.
