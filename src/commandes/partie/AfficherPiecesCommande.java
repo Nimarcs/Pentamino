@@ -22,7 +22,7 @@ public class AfficherPiecesCommande extends CommandePartie {
         }
         System.out.println("Listes de toutes les pièces disponibles à leur indice respectif:");
         for (int i = 0; i < partie.getPieceAPoser().size(); i++) {
-            System.out.printf(" -(%s) %s%n", i, partie.getPieceAPoser().get(i));
+            System.out.printf(" -(%s) %n%s%n", i, partie.getPieceAPoser().get(i));
         }
     }
 
