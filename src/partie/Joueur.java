@@ -88,7 +88,10 @@ public abstract class Joueur implements Comparable<Joueur> {
 
     @Override
     public String toString() {
-        return this.prenom + " (" + this.score + ")";
+        //%10s signifie que le string prendra 10 char dans tout les cas et rajoutera des ' ' si necessaire a gauche
+        //%06.2f signifie que le score prendra 6 char (virgule comprise) dont deux apres la virgule
+        // si ce n'est pas assez grand ça rajoute des 0
+        return String.format("%10s (%06.2f)",this.prenom , this.score );
     }
 
 }
