@@ -143,6 +143,8 @@ public class Jeu implements Serializable {
                 String commande = scanner.nextLine();
                 this.executerCommandeJoueur(commande, joueur);
             }
+            this.partieEstFinis = false;
+            this.indiceJoueurCourant = -1;
         }
     }
 
