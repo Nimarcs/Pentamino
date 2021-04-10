@@ -25,6 +25,9 @@ public class AfficherJoueurCommande extends CommandeJeu {
             Collections.sort(joueurs);
             System.out.println("Joueurs par score moyen:");
             for (int i = 0; i < joueurs.size(); i++) {
+                //solution utilisant java 11 pour les espaces
+                //String blank = " ".repeat(((""+joueurs.size()).length() - ("" +i).length())+1);
+                //System.out.printf(" %d:%s%s%n", i,blank, joueurs.get(i).toString());
                 if (i< 10) {
                     System.out.printf(" %d: %s%n", i, joueurs.get(i).toString());
                 }else{
@@ -39,6 +42,9 @@ public class AfficherJoueurCommande extends CommandeJeu {
             });
             System.out.println("Joueurs par ordre alphabétique:");
             for (int i = 0; i < joueurs.size(); i++) {
+                //solution utilisant java 11 pour les espaces
+                //String blank = " ".repeat(((""+joueurs.size()).length() - ("" +i).length())+1);
+                //System.out.printf(" %d:%s%s%n", i,blank, joueurs.get(i).toString());
                 if (i< 10) {
                     System.out.printf(" %d: %s%n", i, joueurs.get(i).toString());
                 }else{
