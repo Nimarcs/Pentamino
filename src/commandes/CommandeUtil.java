@@ -13,7 +13,7 @@ public class CommandeUtil {
     public static int trouverIndiceCommande(List<? extends Commande> commandes, String commandeName) {
         int indice = -1;
         int i = 0;
-        while (indice == -1 && i < commandeName.length()) {
+        while (indice == -1 && i < commandes.size()) {
             if(commandeName.equals(commandes.get(i).getAlias())) indice = i;
             else i++;
         }

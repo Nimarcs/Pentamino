@@ -20,9 +20,7 @@ public class AideJeuCommande extends CommandeJeu {
 
     public void executer(String[] args, Jeu jeu) {
         System.out.println("Liste de toutes les commandes:");
-        for (Commande commande : this.commandes) {
-            commande.afficherAide();
-        }
+        this.commandes.forEach(Commande::afficherAide);
         System.out.println();
     }
 }
