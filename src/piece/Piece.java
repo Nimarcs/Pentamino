@@ -46,7 +46,7 @@ public class Piece implements Serializable {
      * @throws CharInvalide renvoye si pLettre n'est pas un char valide
      * @throws ValeurNonTraite revoye en cas d'erreur dans lireFichier
      */
-    public Piece (int pX, int pY, char pLettre, String nomFichier) throws CoordonneeInvalide, IOException, CharInvalide, ValeurNonTraite {
+    protected Piece (int pX, int pY, char pLettre, String nomFichier) throws CoordonneeInvalide, IOException, CharInvalide, ValeurNonTraite {
 
         //coordonnees
         //les coordonees ne peuvent pas être completement verifier ici et doivent etre fournit correcte
