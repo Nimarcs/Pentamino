@@ -9,8 +9,15 @@ import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * test de la classe JoueurIntermediaire
+ */
 public class TestJoueurIntermediaire {
 
+    /**
+     * test du contructeur de JoueurIntermediaire
+     * cas normal
+     */
     @Test
     public void test_constructeur_normal() {
         //preparation des donnees
@@ -24,6 +31,10 @@ public class TestJoueurIntermediaire {
         assertEquals("La liste de partie doit être vide", 0, joueurIntermedaire.getParties().size());
     }
 
+    /**
+     * test de la methode ajouterPiece
+     * cas normal
+     */
     @Test
     public void test_ajouterPiece_normal() throws CoordonneeInvalide, AucunePartie, NumeroInconnue, CharInvalide, ValeurNonTraite, IOException, PlacementInterdit {
         //preparation des donnees
@@ -38,6 +49,10 @@ public class TestJoueurIntermediaire {
         assertEquals("La pièce doit être posé", 1, partie.getPiecePosees().size());
     }
 
+    /**
+     * test de la methode ajouterPiece
+     * cas avec la case deja occupe
+     */
     @Test(expected = PlacementInterdit.class)
     public void test_ajouterPiece_caseDejaOccupe() throws CoordonneeInvalide, AucunePartie, NumeroInconnue, CharInvalide, ValeurNonTraite, IOException, PlacementInterdit {
         //preparation des donnees
@@ -53,6 +68,10 @@ public class TestJoueurIntermediaire {
         //doit throw exception
     }
 
+    /**
+     * test de la methode ajouterPiece
+     * cas ou la piece deborde
+     */
     @Test
     public void test_ajouterPiece_pieceDeborde() throws CoordonneeInvalide, AucunePartie, NumeroInconnue, CharInvalide, ValeurNonTraite, IOException, PlacementInterdit {
         //preparation des donnees
@@ -67,6 +86,10 @@ public class TestJoueurIntermediaire {
         assertEquals("La pièce doit être posé", 1, partie.getPiecePosees().size());
     }
 
+    /**
+     * test de la methode calculerScore
+     * cas normal
+     */
     @Test
     public void test_calculerScore_normal() throws CoordonneeInvalide, AucunePartie, NumeroInconnue, CharInvalide, ValeurNonTraite, IOException, PlacementInterdit {
         //preparation des donnees

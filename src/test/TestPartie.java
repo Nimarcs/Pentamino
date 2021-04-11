@@ -11,8 +11,15 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * test de la classe Partie
+ */
 public class TestPartie {
 
+    /**
+     * test du contructeur de Partie
+     * cas normal
+     */
     @Test()
     public void test_constructeur_normal() throws CoordonneeInvalide, ValeurNonTraite, CharInvalide, IOException {
         //preparation des donnees
@@ -30,6 +37,10 @@ public class TestPartie {
         }
     }
 
+    /**
+     * test du contructeur de Partie
+     * cas avec des coordonnee negatives
+     */
     @Test(expected = CoordonneeInvalide.class)
     public void test_constructeur_coordonneeNegative() throws CoordonneeInvalide, ValeurNonTraite, CharInvalide, IOException {
         //preparation des donnees
@@ -42,6 +53,10 @@ public class TestPartie {
         //doit throw exception
     }
 
+    /**
+     * test de la methode remplirAleatoirementPieceAPoser
+     * cas normal
+     */
     @Test
     public void test_remplirAleatoirementPieceAPoser_normal() throws IOException, CharInvalide, CoordonneeInvalide, ValeurNonTraite {
         //preparation des donnees
@@ -53,6 +68,10 @@ public class TestPartie {
         assertEquals("Doit avoir 10 pieces", 10, pieces.size());
     }
 
+    /**
+     * test de la methode forcerPoserPiece
+     * cas normal
+     */
     @Test
     public void test_forcerPoserPiece_normal() throws CoordonneeInvalide, ValeurNonTraite, CharInvalide, IOException, NumeroInconnue {
         //preparation des donnees
@@ -72,6 +91,46 @@ public class TestPartie {
         }
     }
 
+    /**
+     * test de la methode forcerPoserPiece
+     * cas avec des coordonne negative
+     */
+    @Test(expected = CoordonneeInvalide.class)
+    public void test_forcerPoserPiece_coordonneeNagtive() throws CoordonneeInvalide, ValeurNonTraite, CharInvalide, IOException, NumeroInconnue {
+        //preparation des donnees
+        Partie partie = new Partie(10 , 10);
+        //methode teste
+        partie.forcerPosePiece(0, -1, 5);
+    }
+
+    /**
+     * test de la methode forcerPoserPiece
+     * cas avec des coordonne trop grande
+     */
+    @Test(expected = CoordonneeInvalide.class)
+    public void test_forcerPoserPiece_coordonneeTropGrande() throws CoordonneeInvalide, ValeurNonTraite, CharInvalide, IOException, NumeroInconnue {
+        //preparation des donnees
+        Partie partie = new Partie(10 , 10);
+        //methode teste
+        partie.forcerPosePiece(0, 5, 11);
+    }
+
+    /**
+     * test de la methode forcerPoserPiece
+     * cas avec un numero de piece inconnu
+     */
+    @Test(expected = NumeroInconnue.class)
+    public void test_forcerPoserPiece_numPieceInconnue() throws CoordonneeInvalide, ValeurNonTraite, CharInvalide, IOException, NumeroInconnue {
+        //preparation des donnees
+        Partie partie = new Partie(10 , 10);
+        //methode teste
+        partie.forcerPosePiece(10, 0, 0);
+    }
+
+    /**
+     * test de la methode retirerDernierePiece
+     * cas normal
+     */
     @Test
     public void test_retirerDernierePiece_normal() throws CoordonneeInvalide, ValeurNonTraite, CharInvalide, IOException, NumeroInconnue, AucunePiecePlace {
         //preparation des donnees
@@ -86,32 +145,12 @@ public class TestPartie {
         assertEquals("La partie doit avoir ses 10 pièces", 10, partie.getPieceAPoser().size());
     }
 
-    @Test(expected = CoordonneeInvalide.class)
-    public void test_retirerDernierePiece_coordonneeNagtive() throws CoordonneeInvalide, ValeurNonTraite, CharInvalide, IOException, NumeroInconnue {
-        //preparation des donnees
-        Partie partie = new Partie(10 , 10);
-        //methode teste
-        partie.forcerPosePiece(0, -1, 5);
-    }
-
-    @Test(expected = CoordonneeInvalide.class)
-    public void test_retirerDernierePiece_coordonneeTropGrande() throws CoordonneeInvalide, ValeurNonTraite, CharInvalide, IOException, NumeroInconnue {
-        //preparation des donnees
-        Partie partie = new Partie(10 , 10);
-        //methode teste
-        partie.forcerPosePiece(0, 5, 11);
-    }
-
-    @Test(expected = NumeroInconnue.class)
-    public void test_retirerDernierePiece_numPieceInconnue() throws CoordonneeInvalide, ValeurNonTraite, CharInvalide, IOException, NumeroInconnue {
-        //preparation des donnees
-        Partie partie = new Partie(10 , 10);
-        //methode teste
-        partie.forcerPosePiece(10, 0, 0);
-    }
-
+    /**
+     * test de la methode retirerDernierePiece
+     * cas sans piece
+     */
     @Test(expected=AucunePiecePlace.class)
-    public void test_retirerDernierePiece_exception() throws CoordonneeInvalide, ValeurNonTraite, CharInvalide, IOException, AucunePiecePlace {
+    public void test_retirerDernierePiece_pasDePiece() throws CoordonneeInvalide, ValeurNonTraite, CharInvalide, IOException, AucunePiecePlace {
         //preparation des donnees
         Partie partie = new Partie(10 , 10);
 
@@ -122,6 +161,10 @@ public class TestPartie {
         //doit throw l'exception
     }
 
+    /**
+     * test de la methode testerPosePiece
+     * cas normal
+     */
     @Test
     public void test_testerPosePiece_normal() throws CoordonneeInvalide, ValeurNonTraite, CharInvalide, IOException, NumeroInconnue, PieceDebordeTerrain, CaseDejaOccupe {
         //preparation des donnees
@@ -134,6 +177,10 @@ public class TestPartie {
         //ne doit pas throw d'exception
     }
 
+    /**
+     * test de la methode testerPosePiece
+     * cas avec des coordonee negative
+     */
     @Test(expected = CoordonneeInvalide.class)
     public void test_testerPosePiece_coordonneNegative() throws CoordonneeInvalide, ValeurNonTraite, CharInvalide, IOException, NumeroInconnue, PieceDebordeTerrain, CaseDejaOccupe {
         //preparation des donnees
@@ -146,6 +193,10 @@ public class TestPartie {
         //doit throw exception
     }
 
+    /**
+     * test de la methode testerPosePiece
+     * cas avec des coordonee trop grande
+     */
     @Test(expected = CoordonneeInvalide.class)
     public void test_testerPosePiece_coordonneTropGrande() throws CoordonneeInvalide, ValeurNonTraite, CharInvalide, IOException, NumeroInconnue, PieceDebordeTerrain, CaseDejaOccupe {
         //preparation des donnees
@@ -158,6 +209,10 @@ public class TestPartie {
         //doit throw exception
     }
 
+    /**
+     * test de la methode testerPosePiece
+     * cas avec un numero de piece inconnu
+     */
     @Test(expected = NumeroInconnue.class)
     public void test_testerPosePiece_numPieceInconnu() throws CoordonneeInvalide, ValeurNonTraite, CharInvalide, IOException, NumeroInconnue, PieceDebordeTerrain, CaseDejaOccupe {
         //preparation des donnees
@@ -170,6 +225,10 @@ public class TestPartie {
         //doit throw exception
     }
 
+    /**
+     * test de la methode testerPosePiece
+     * cas avec des coordonee negative
+     */
     @Test(expected = PieceDebordeTerrain.class)
     public void test_testerPosePiece_PieceDeborde() throws CoordonneeInvalide, ValeurNonTraite, CharInvalide, IOException, NumeroInconnue, PieceDebordeTerrain, CaseDejaOccupe {
         //preparation des donnees
@@ -182,6 +241,10 @@ public class TestPartie {
         //doit throw exception
     }
 
+    /**
+     * test de la methode testerPosePiece
+     * cas ou la case est deja occupe
+     */
     @Test(expected = CaseDejaOccupe.class)
     public void test_testerPosePiece_cadeDejaOccupe() throws CoordonneeInvalide, ValeurNonTraite, CharInvalide, IOException, NumeroInconnue, PieceDebordeTerrain, CaseDejaOccupe {
         //preparation des donnees

@@ -1,19 +1,29 @@
 package test;
 
+import exceptions.CharInvalide;
 import exceptions.CoordonneeInvalide;
+import exceptions.ValeurNonTraite;
 import piece.Carre;
 import org.junit.Test;
 import piece.L;
 import piece.U;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * test de la classe Piece et de la classe Carre
+ */
 public class TestPiece {
 
+    /**
+     * test du contructeur de carre
+     * cas normal
+     */
     @Test
-    public void test_carre_normal() throws Exception {
+    public void test_carre_normal() throws CoordonneeInvalide {
 
         Carre c = new Carre(7, 6);
         assertEquals("carre au mauvais endroit", 7, c.getX());
@@ -21,8 +31,12 @@ public class TestPiece {
 
     }
 
+    /**
+     * test du contructeur de carre
+     * cas coordonnee negative
+     */
     @Test (expected = CoordonneeInvalide.class)
-    public void test_carre_negatif() throws Exception {
+    public void test_carre_negatif() throws CoordonneeInvalide {
 
         Carre c = new Carre(-7, 6);
         Carre c1 = new Carre(7, -6);
@@ -30,8 +44,12 @@ public class TestPiece {
 
     }
 
+    /**
+     * test du contructeur de piece
+     * cas normal avec U
+     */
     @Test
-    public void test_piece_normalU() throws Exception {
+    public void test_piece_normalU() throws CoordonneeInvalide, ValeurNonTraite, IOException, CharInvalide {
 
         U piece = new U(0, 0);
         assertEquals("La lettre est cense etre U ", 'U', piece.getLettre());
@@ -47,8 +65,12 @@ public class TestPiece {
 
     }
 
+    /**
+     * test du contructeur de piece
+     * cas normal avec L
+     */
     @Test
-    public void test_piece_normalL() throws Exception {
+    public void test_piece_normalL() throws CoordonneeInvalide, ValeurNonTraite, IOException, CharInvalide {
 
         L piece = new L(0, 0);
         assertEquals("La lettre est cense etre L ", 'L', piece.getLettre());
@@ -70,18 +92,30 @@ public class TestPiece {
 
     }
 
+    /**
+     * test du contructeur de piecee
+     * cas avec x negatif
+     */
     @Test (expected = CoordonneeInvalide.class)
-    public void test_piece_Xnegatif() throws Exception {
+    public void test_piece_Xnegatif() throws CoordonneeInvalide, ValeurNonTraite, IOException, CharInvalide {
         U piece = new U(-1, 0);
     }
 
+    /**
+     * test du contructeur de piece
+     * cas avec Y negatif
+     */
     @Test (expected = CoordonneeInvalide.class)
-    public void test_piece_Ynegatif() throws Exception {
+    public void test_piece_Ynegatif() throws CoordonneeInvalide, ValeurNonTraite, IOException, CharInvalide {
         U piece = new U(0, -120);
     }
 
+    /**
+     * test de la methode toString
+     * cas normal avec U
+     */
     @Test
-    public void test_toString_normalU() throws Exception {
+    public void test_toString_normalU() throws CoordonneeInvalide, ValeurNonTraite, IOException, CharInvalide {
 
         // preparation des donnees
         U piece = new U(0, 0);
@@ -93,8 +127,12 @@ public class TestPiece {
 
     }
 
+    /**
+     * test de la methode toString
+     * cas normal avec L
+     */
     @Test
-    public void test_toString_normalL() throws Exception {
+    public void test_toString_normalL() throws CoordonneeInvalide, ValeurNonTraite, IOException, CharInvalide {
 
         // preparation des donnees
         L piece = new L(0, 0);
@@ -106,8 +144,12 @@ public class TestPiece {
 
     }
 
+    /**
+     * test de la methode equals
+     * cas avec le meme objet
+     */
     @Test
-    public void test_equals_memeObjet() throws Exception {
+    public void test_equals_memeObjet() throws CoordonneeInvalide, ValeurNonTraite, IOException, CharInvalide {
 
         // preparation des donnees
         L piece = new L(4, 0);
@@ -119,8 +161,12 @@ public class TestPiece {
 
     }
 
+    /**
+     * test de la methode equals
+     * cas normal
+     */
     @Test
-    public void test_equals_normal() throws Exception {
+    public void test_equals_normal() throws CoordonneeInvalide, ValeurNonTraite, IOException, CharInvalide {
 
         // preparation des donnees
         L piece = new L(4, 0);
@@ -133,8 +179,12 @@ public class TestPiece {
 
     }
 
+    /**
+     * test de la methode equals
+     * cas avec des positions differentes
+     */
     @Test
-    public void test_equals_positionDiff() throws Exception {
+    public void test_equals_positionDiff() throws CoordonneeInvalide, ValeurNonTraite, IOException, CharInvalide {
 
         // preparation des donnees
         L piece = new L(4, 0);
@@ -147,8 +197,12 @@ public class TestPiece {
 
     }
 
+    /**
+     * test de la methode equals
+     * cas avec des pieces differentes (un U et un L)
+     */
     @Test
-    public void test_equals_pieceDiff() throws Exception {
+    public void test_equals_pieceDiff() throws CoordonneeInvalide, ValeurNonTraite, IOException, CharInvalide {
 
         // preparation des donnees
         L piece = new L(4, 0);
