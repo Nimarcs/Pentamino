@@ -68,6 +68,8 @@ public class Carre implements Serializable {
         this.y = y;
     }
 
+    //methodes
+
     @Override
     public String toString() {
         return "Carre{" +
@@ -76,5 +78,5 @@ public class Carre implements Serializable {
                 '}';
     }
 
-    //methodes
+
 }
