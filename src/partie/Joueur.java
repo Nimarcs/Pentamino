@@ -86,7 +86,7 @@ public abstract class Joueur implements Comparable<Joueur>, Serializable {
     }
 
     public int compareTo(Joueur o) {
-        return Double.compare(this.score, o.score);
+        return Double.compare(o.score, this.score);
     }
 
     @Override
