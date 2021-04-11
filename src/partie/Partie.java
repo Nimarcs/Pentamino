@@ -101,7 +101,7 @@ public class Partie implements Serializable {
 
         //on remplit la liste avec des element aleatoire de piecesPossible
         for(int i  =0; i< 10; i++) {
-            int rand =  (int) (Math.random() * ((piecesPossible.size()) + 1));
+            int rand =  (int) (Math.random() * ((piecesPossible.size())));
             this.pieceAPoser.add(piecesPossible.get(rand));
             piecesPossible.remove(rand);
         }
