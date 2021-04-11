@@ -157,6 +157,7 @@ public class Partie implements Serializable {
     }
 
     public void testerPieceAPoserExiste(int n) throws NumeroInconnue {
+        if(n < 0) throw new NumeroInconnue(n);
         if(this.pieceAPoser.size() <= n) throw new NumeroInconnue(n);
     }
 
@@ -224,11 +225,31 @@ public class Partie implements Serializable {
     }
 
     /**
+     * Getter pour piecePosees
+     * @return liste des pièces posées
+     */
+    public List<Piece> getPiecePosees() {
+        return piecePosees;
+    }
+
+    /**
      * getter de score
      * @return score de la partie
      */
     public int getScore() {
         return score;
+    }
+
+    /**
+     * Méthode utilisé pour les tests
+     * @param x posX
+     * @param y posY
+     * @return char aux coordonnée x;y
+     * @throws CoordonneeInvalide retourné si x;y invalide
+     */
+    public char getCharAt(int x, int y) throws CoordonneeInvalide {
+        this.testCoordonnee(x, y);
+        return this.grille[x][y];
     }
 
 
