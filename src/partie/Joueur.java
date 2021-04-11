@@ -44,17 +44,6 @@ public abstract class Joueur implements Comparable<Joueur>, Serializable {
         return this.parties;
     }
 
-    /**
-     * Méthode retournant la partie actuelle d'un joueur
-     * @return partie actuelle d'un joueur
-     * @throws PartieInconnue cas ou il n'a aucune partie
-     */
-    public Partie getLastPartie() throws PartieInconnue {
-        if (this.parties.size() == 0)
-            throw new PartieInconnue(-1);
-        return this.parties.get(this.parties.size() -1);
-    }
-
     //methodes
 
     public abstract void calculerScore();
@@ -103,6 +92,7 @@ public abstract class Joueur implements Comparable<Joueur>, Serializable {
     }
 
     public void setPartieActuelle(int indice) throws PartieInconnue {
+        if(indice < 0) throw new PartieInconnue(indice);
         if(indice >= this.parties.size()) throw new PartieInconnue(indice);
         this.partieActuelle = this.parties.get(indice);
     }
