@@ -16,10 +16,12 @@ public class Partie implements Serializable {
      * Représente le plateau de jeu
      */
     private char[][] grille;
+
     /**
      * Liste représentant les piéces qui ont été posé
      */
     private List<Piece> piecePosees;
+
     /**
      * Liste représentant les pièces à poser par les joueurs
      */

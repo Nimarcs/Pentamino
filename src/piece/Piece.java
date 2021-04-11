@@ -170,6 +170,14 @@ public class Piece implements Serializable {
 
     }
 
+    /**
+     * methode qui affiche la piece
+     * sous la forme de # pour case pleine et _ pour une case vide
+     * Exemples:
+     * #_#      ###
+     * ### u    _#_ t
+     * @return chaine de caractere representant la piece
+     */
     @Override
     public String toString() {
         //initalisation

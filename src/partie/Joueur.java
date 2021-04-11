@@ -11,15 +11,32 @@ public abstract class Joueur implements Comparable<Joueur>, Serializable {
 
     //attributs
 
+    /**
+     * parties jouee (y compris la partie actuelle)
+     */
     private List<Partie> parties;
 
+    /**
+     * partie en cours
+     */
     private Partie partieActuelle;
 
+    /**
+     * score du joueur (calcule grace au parties)
+     */
     private double score;
 
+    /**
+     * prenom choisi par le joueur
+     */
     private String prenom;
 
     //contructeurs
+
+    /**
+     * Constructeur de Joueur
+     * @param prenom prenom du joueur
+     */
     public Joueur(String prenom){
         this.prenom = prenom;
         this.parties = new ArrayList<Partie>();
@@ -28,24 +45,44 @@ public abstract class Joueur implements Comparable<Joueur>, Serializable {
 
     //getter et setter
 
+    /**
+     * getter de prenom
+     * @return prenom
+     */
     public String getPrenom() {
         return prenom;
     }
 
+    /**
+     * getter de score
+     * @return score
+     */
     public double getScore() {
         return this.score;
     }
 
+    /**
+     * setter de score
+     * @param score score a inserer
+     */
     protected void setScore(double score) {
-        this.score = score;
+        if (score > 0)
+            this.score = score;
     }
 
+    /**
+     * getter de parties
+     * @return parties
+     */
     public List<Partie> getParties() {
         return this.parties;
     }
 
     //methodes
 
+    /**
+     * methode permettant de calculer/recalculer le score du joueur
+     */
     public abstract void calculerScore();
 
     /**
@@ -74,10 +111,20 @@ public abstract class Joueur implements Comparable<Joueur>, Serializable {
         this.partieActuelle = partie;
     }
 
+    /**
+     * methode permettant de comparer deux joueur
+     * utilise le score
+     * @param o joueur avec qui le comparer
+     * @return entier positif, nul ou negatif en fonction de si this est au dessous, equal ou au dessus du joueur donne
+     */
     public int compareTo(Joueur o) {
         return Double.compare(o.score, this.score);
     }
 
+    /**
+     * methode retournant les informations liee au joueur formate
+     * @return informations liee au joueur formate
+     */
     @Override
     public String toString() {
         //%10s signifie que le string prendra 10 char dans tout les cas et rajoutera des ' ' si necessaire a gauche
@@ -86,11 +133,21 @@ public abstract class Joueur implements Comparable<Joueur>, Serializable {
         return String.format("%10s (%06.2f)",this.prenom , this.score );
     }
 
+    /**
+     * getter de la partie actuelle
+     * @return partie actuelle
+     * @throws AucunePartie renvoye si il ni a pas de partie en cours
+     */
     public Partie getPartieActuelle() throws AucunePartie {
         if(this.partieActuelle == null) throw new AucunePartie();
         return partieActuelle;
     }
 
+    /**
+     * setter de la partie actuelle
+     * @param indice indice de la partie dans parties
+     * @throws PartieInconnue renvoye si la partie n'est pas trouve
+     */
     public void setPartieActuelle(int indice) throws PartieInconnue {
         if(indice < 0) throw new PartieInconnue(indice);
         if(indice >= this.parties.size()) throw new PartieInconnue(indice);

@@ -231,11 +231,20 @@ public class Jeu implements Serializable {
 
     }
 
+    /**
+     * getter de joueurs
+     * @return joueurs
+     */
     public List<Joueur> getJoueurs() {
         return joueurs;
     }
 
+    /**
+     * setter de joueurs
+     * @return joueurs
+     */
     public void setJoueurs(List<Joueur> joueurs) {
         this.joueurs = joueurs;
     }
+    
 }
