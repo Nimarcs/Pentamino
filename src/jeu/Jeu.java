@@ -204,6 +204,8 @@ public class Jeu implements Serializable {
     public static void main(String[] args) {
         Jeu jeu = new Jeu();
         Scanner scanner = new Scanner(System.in);
+
+        //on demande si on veut charger un jeu
         System.out.println("Voulez-vous charger un jeu ? (Y/N)");
         String reponse = scanner.nextLine().toUpperCase();
         //tant que ce n'est ni Y ni N
@@ -221,6 +223,7 @@ public class Jeu implements Serializable {
                 System.out.println("Erreur lors du chargement du fichier, lancement d'un nouveau jeu");
             }
         }
+        
         //on creer puis lance un jeu
         try {
             jeu.lancerJeu();
@@ -246,5 +249,5 @@ public class Jeu implements Serializable {
     public void setJoueurs(List<Joueur> joueurs) {
         this.joueurs = joueurs;
     }
-    
+
 }
