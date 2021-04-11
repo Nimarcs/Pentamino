@@ -33,6 +33,26 @@ public class Jeu implements Serializable {
     private int indicePartieCourante;
 
     /**
+     * signale la fin d'une partie
+     */
+    private boolean partieEstFinis;
+
+    /**
+     * signale la fin du jeu
+     */
+    private boolean estFinis;
+
+    /**
+     * liste des commandes disponible pour jouer
+     */
+    private List<CommandePartie> commandesPartie;
+
+    /**
+     * liste de commandes disponoble pour le jeu
+     */
+    private List<CommandeJeu> commandesJeu;
+
+    /**
      * Méthode permettant de sélectionner le joueur avec lequel on veut jouer à partir d'un indice qui doit exister
      * @param indice indice du joueur sélectionné
      * @return true si indice existe, sinon false
@@ -54,25 +74,7 @@ public class Jeu implements Serializable {
         return true;
     }
 
-    /**
-     * signale la fin d'une partie
-     */
-    private boolean partieEstFinis;
 
-    /**
-     * signale la fin du jeu
-     */
-    private boolean estFinis;
-
-    /**
-     * liste des commandes disponible pour jouer
-     */
-    private List<CommandePartie> commandesPartie;
-
-    /**
-     * liste de commandes disponoble pour le jeu
-     */
-    private List<CommandeJeu> commandesJeu;
 
 
     //constructeur
