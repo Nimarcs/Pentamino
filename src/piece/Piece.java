@@ -215,6 +215,6 @@ public class Piece implements Serializable {
 
         if (x != piece.x) return false;
         if (y != piece.y) return false;
-        return (lettre != piece.lettre);
+        return (lettre == piece.lettre);
     }
 }
